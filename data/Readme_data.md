@@ -1,4 +1,8 @@
 # **Archivos:**
+## **'tab_grupos.dat'**
+
+## **'tab_gal_grupos.dat'**
+
 ## **'full'** (Todos tienen las mismas propiedades)
 
 - 'compact_in_gg_m3_full'

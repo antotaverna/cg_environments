@@ -500,6 +500,8 @@ par(mar = c(0, 2, 0, 3), oma = c(4, 3, 3, 0)) #pegame este boxplot
 
 #par(mgp=c(1.8,0.4,0))      	        #margen labels
 
+colores=c("red",'darkorange','magenta','blue','darkgreen','purple')
+
 # ------------------------------------------------------
 # -----------Redshifth----------------------------------
 # ------------------------------------------------------
@@ -513,13 +515,13 @@ vr <- subset(VG$zmedian,VG$tipo==0) #voids
 vs <- subset(VG$zmedian,VG$tipo==1) #voids
 
 
-boxplot(x,z,y,w,vr,vs,	
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,notch = TRUE,varwidth = TRUE,outline = FALSE,
         #ylim = c(0,0.2),
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+        col= colores)
 mtext(expression(paste(Redshift)), side = 2, cex = 1, line = 3.2, col = "black")
 
 # ------------------------------------------------------
@@ -533,7 +535,7 @@ v <- VG$sigv #voids
 vr <- subset(VG$sigv,VG$tipo==0) #voids
 vs <- subset(VG$sigv,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vr,vs,	
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -542,7 +544,7 @@ boxplot(x,z,y,w,vr,vs,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+        col= colores)
 laby=TeX('$\\sigma$ \\[km s$^{-1}$\\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
@@ -557,7 +559,7 @@ v <- VG$mu #campo
 vr <- subset(VG$mu,VG$tipo==0) #voids
 vs <- subset(VG$mu,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vr,vs,	
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -566,7 +568,7 @@ boxplot(x,z,y,w,vr,vs,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+        col= colores)
 
 mtext(expression(paste(mu)), side = 2, cex = 1, line = 3.2, col = "black")
 
@@ -581,7 +583,7 @@ v <- VG$rabs1 #campo
 vr <- subset(VG$rabs1,VG$tipo==0) #voids
 vs <- subset(VG$rabs1,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vr,vs,	
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -590,7 +592,7 @@ boxplot(x,z,y,w,vr,vs,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+        col= colores)
 laby=TeX('M_{brigth]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
@@ -605,7 +607,7 @@ v <- VG$radio_mins #voids
 vr <- subset(VG$radio_mins,VG$tipo==0) #voids
 vs <- subset(VG$radio_mins,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vr,vs,	
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -613,7 +615,7 @@ boxplot(x,z,y,w,vr,vs,
         #ylim = c(0,0.2),
 	cex.axis=1.2,
 	#xaxt="n",
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+        col= colores)
 
 laby=TeX('$\\theta$ \\[arcmin\\]') ;
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -629,7 +631,7 @@ v <- VG$rp #voids
 vr <- subset(VG$rp,VG$tipo==0) #voids
 vs <- subset(VG$rp,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vr,vs,	
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -639,7 +641,7 @@ boxplot(x,z,y,w,vr,vs,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
 	#names=c('N','GG','F','C'),
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+        col= colores)
 laby=TeX('$r_p$ \\[kpc h$^{-1}$ \\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
@@ -655,7 +657,7 @@ v <- VG$dij*1000. #voids
 vr <- subset(VG$dij*1000.,VG$tipo==0) #voids
 vs <- subset(VG$dij*1000.,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vr,vs,	
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -665,7 +667,7 @@ boxplot(x,z,y,w,vr,vs,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+        col= colores)
 laby=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
@@ -680,7 +682,7 @@ v <- VG$tcr #voids
 vr <- subset(VG$tcr,VG$tipo==0) #voids
 vs <- subset(VG$tcr,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vr,vs,	
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -689,8 +691,8 @@ boxplot(x,z,y,w,vr,vs,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_R}$'),TeX('$CG_{V_S}$')),
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+        col= colores)
 
 laby=TeX('$H_0 \\, t_{cr}$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -700,7 +702,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 # ------------------------------------------------------
 # ----------- M2 - M1 ----------------------------------
 # ------------------------------------------------------
-boxplot(nodo_dif_2bri,fil_dif_2bri,Fof_dif_2bri,cam_dif_2bri,vr_dif_2bri,vs_dif_2bri,
+boxplot(nodo_dif_2bri,fil_dif_2bri,Fof_dif_2bri,cam_dif_2bri,vs_dif_2bri,vr_dif_2bri,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -709,8 +711,8 @@ boxplot(nodo_dif_2bri,fil_dif_2bri,Fof_dif_2bri,cam_dif_2bri,vr_dif_2bri,vs_dif_
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{L}$'),TeX('$CG_{F}$'),TeX('$CG_{C}$'),TeX('$CG_{V_R}$'),TeX('$CG_{V_S}$')),
-        col= c("red",'darkorange','magenta','blue','purple','darkgreen'))
+	names=c(TeX('$CG_{N}$'),TeX('$CG_{L}$'),TeX('$CG_{F}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+        col= colores)
 
 laby=TeX('$M_2 -M_1$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")

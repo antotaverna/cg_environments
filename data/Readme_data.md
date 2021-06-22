@@ -6,13 +6,12 @@
 - RA: Right Ascension (J2000).
 - Dec: Declination (J2000).
 - Redshift: Galaxy redshift corrected to the CMB rest-frame.
-- mag_r : r-band observer-frame model apparent magnitud corrected
-- mag_g : g-band observer-frame model apparent magnitud corrected
+- mag_r : r-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
+- mag_g : g-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
+- abs_r : r-band k-corrected absolute magnitud
+- abs_g : g-band k-corrected absolute magnitud
 
-# for galactic extinction in AB system.
-
-## **'tab_grupos.dat'**
-## **'full'** (Todos tienen las mismas propiedades)
+## **'tab_grupos.dat' y xxx_full** (Todos tienen las mismas propiedades)
 
 - 'compact_in_gg_m3_full'
 - 'compact_in_node_m3_full'

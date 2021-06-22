@@ -1,0 +1,29 @@
+sdss_dr12_z0.12.dat
+===================
+alpha
+delta
+redshift
+distance [mpc/h]
+x [mpc/h]
+y [mpc/h]
+z [mpc/h]
+u_mag 
+g_mag
+r_mag
+i_mag
+z_mag
+modulo de distancia
+
+voids_sdssdr12_z0.1.dat
+=======================
+radio [mpc/h]
+alpha
+delta
+redshift
+distance [mpc/h]
+x [mpc/h]
+y [mpc/h]
+z [mpc/h]
+delta integrada a Rvoid
+maxima delta integrada entre 2 y 3 Rvoid
+flag de completitud (recomendable no usar los voids con flag < 1.0)

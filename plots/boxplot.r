@@ -429,6 +429,7 @@ x <- subset(S$tcr, S$zmedian <= z_max)  #nodos
 y <- SS$tcr #grupos FoF
 z <- FF$tcr #filamentos
 w <- Gf$tcr #campo
+#w <- (subset(w,w>0.3)
 v <- VG$tcr #voids
 
 #boxplot(x,y,z,w,v,

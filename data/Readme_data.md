@@ -33,12 +33,13 @@
 - rabs1: Magnitud absoluta de la galaxia mas brillante. 
 - d_ij: Distancia mediana entre miembros. 
 - tcr:  Tiemto de crossing.
-- rp:   Radio proyectado (radio mins en Kpc). 
+- rp:   Radio proyectado (radio mins en Kpc).
+- rabs2: Magnitud absoluta de la 2da galaxia mas brillante. 
 
 **Nota**: El archivo voids tiene una columna mas:
 - tipo: void tipo R (flag=0) y tipo S (flag=1)
 *********************************************************************************************************
 *********************************************************************************************************
-## **'compact_for_vane'**
+## **'compact_in_all'**
 Es lo mismo Pero en la ultima fila se agrega el entorno (en character)
 

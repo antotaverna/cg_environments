@@ -41,5 +41,5 @@
 *********************************************************************************************************
 *********************************************************************************************************
 ## **'compact_in_all'**
-Es lo mismo Pero en la ultima fila se agrega el entorno (en character)
+Es lo mismo que el archivo compact_for_vane Pero en la ultima fila se agrega el entorno (en character)
 

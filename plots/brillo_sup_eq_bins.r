@@ -1,4 +1,4 @@
-#source("brillo_superficial.r")
+#source("brillo_sup_eq_bins.r")
 library(bootstrap); library(latex2exp); library(astrolibR); library(magicaxis)
 #
 #--------------------------------------------------------------
@@ -28,15 +28,26 @@ bin2=3
 
 #------------------------------------------------------------------------------------------------------------
 # ------ CG in filaments-------------------------------------------------------------------------------------
+R_no<-S$rabs1
+R_gg<-SS$rabs1
+R_fi<-FF$rabs1
+R_cp<-Gf$rabs1
+R_vv<-VG$rabs1
+
+a=c(R_no,R_gg,R_fi,R_cp,R_vv)
+amax=max(a)
+amin=min(a)
+
 result <- data.frame()
 
 func_fil <- function(arg1,arg2,arg3){
-	# arg1 = Mr
+	# arg1 = Mr o deltaM
 	# arg2 = props: sigma, rproy, tcr
 	# arg3 = length Mr
-
 #------------------PLOT
-min_f=min(arg1); max_f=max(arg1)+0.1;   
+#min_f=min(arg1); max_f=max(arg1)+0.1;   
+#dM=(max_f-min_f)/(bin2)
+min_f=amin; max_f=amax+0.1;   
 dM=(max_f-min_f)/(bin2)
 
 error_f<-vector("logical",bin2) ;  prop_f<-vector('logical',bin2)
@@ -93,7 +104,7 @@ for(k in 1:bin2){
 laby=TeX('$\\sigma$') 
 labx=TeX('$M_{bri} - 5log_{10}h$')
 
-pdf("scatter_mags.pdf")
+pdf("scatter_mags_eq_bins.pdf")
 
 par(family="serif")
 par(cex.lab=1.5)       #Tamaño labels
@@ -169,6 +180,7 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 
 
 legend(-20.,590,c("Node", "Filaments",'Loose','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
+text(-22.5,150,label='a)',cex=1.2)
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -220,6 +232,7 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
+text(-22.5,30,label='b)',cex=1.2)
 #legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -272,6 +285,7 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
+text(-22.5,0.01,label='c)',cex=1.2)
 mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 1, line = 2.2, col = "black")
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -462,6 +476,53 @@ delta12_gg=SS$rabs2-SS$rabs1
 delta12_fi=FF$rabs2-FF$rabs1
 delta12_cp=Gf$rabs2-Gf$rabs1
 delta12_vv=VG$rabs2-VG$rabs1
+
+a=c(delta12_no,delta12_gg,delta12_fi,delta12_cp,delta12_vv)
+amax=max(a)
+amin=min(a)
+
+result <- data.frame()
+
+func_fil <- function(arg1,arg2,arg3){
+	# arg1 = Mr o deltaM
+	# arg2 = props: sigma, rproy, tcr
+	# arg3 = length Mr
+#------------------PLOT
+#min_f=min(arg1); max_f=max(arg1)+0.1;   
+#dM=(max_f-min_f)/(bin2)
+min_f=amin; max_f=amax+0.1;   
+dM=(max_f-min_f)/(bin2)
+
+error_f<-vector("logical",bin2) ;  prop_f<-vector('logical',bin2)
+error2_f<-vector("logical",bin2);  count_f<-vector('logical',bin2)
+colmed_f<-vector("logical",bin2);  FL_f<-vector("logical",bin2)
+a_f<-vector("logical",arg3)
+
+count_f[1:bin2]=0;#lo agregue yo 
+prop_f[1:bin2]=0
+for(i in 1:arg3){
+    ibin=as.integer((arg1[i]-min_f)/dM)+1
+    if(ibin<1)   {ibin=1}
+    if(ibin>bin2){ibin=bin2}
+    k=ibin
+    count_f[k]=count_f[k]+1
+    prop_f[k]=prop_f[k]+arg2[i]
+    a_f[i]<- arg2[i]
+   }
+  
+for(k in 1:bin2){
+   colmed_f[k]=min_f+(dM/2.)*(2*k-1)
+   FL_f[k]= (prop_f[k]/count_f[k]) #normalizado Nbin
+   error2_f[k]=dM
+  }
+
+#------------------
+
+  result=data.frame(colmed_f,FL_f,error_f)
+  return(result)
+} #fin function
+
+
 
 xx_no<-delta12_no  ;yy_no<-S$rp 
 xx_gg<-delta12_gg ;yy_gg<-SS$rp 

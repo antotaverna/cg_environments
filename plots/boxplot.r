@@ -11,15 +11,15 @@ VG<-read.table("../data/compact_in_voids_m3_full")
 HH<-read.table("../data/tab_gal_gru.dat")
 
 #---------COLNAMES ---------
-colnames(SS)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14)] <- c('igru','nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp')
+colnames(SS)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)] <- c('igru','nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp','rabs2')
 
-colnames(Gf)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp')
+colnames(Gf)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp','rabs2')
 
-colnames(S)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp')
+colnames(S)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp','rabs2')
 
-colnames(FF)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp')
+colnames(FF)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp','rabs2')
 
-colnames(VG)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp','tipo')
+colnames(VG)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp','rabs2','tipo')
 
 colnames(HH)[c(1,2,3,4,5,6,7)] <-c("GId", "Nm", "RA", "Dec", "Redshift", "mag_r", "mag_g")
 
@@ -232,37 +232,11 @@ par(mar = c(0, 2, 0, 3), oma = c(4, 3, 3, 0)) #pegame este boxplot
 
 
 
-# ------------------------------------------------------
-# -----------Redshifth----------------------------------
-# ------------------------------------------------------
-z_max=0.087
-x <-  subset(S$zmedian,S$zmedian <= z_max) #nodos
-y <- SS$zmedian #grupos FoF
-z <- FF$zmedian #filamentos
-w <- Gf$zmedian #campo
-v <- VG$zmedian #voids
-
-#boxplot(x,y,z,w,v,	
-boxplot(x,z,y,w,v,	
-	las = 1,notch = TRUE,varwidth = TRUE,outline = FALSE,
-        #ylim = c(0,0.2),
-	cex.axis=1.2,
-#	lwd=c(1.2,1.2,1.5),
-	xaxt="n",
-        #col= c("red",'magenta','darkorange','blue','black'))
-        col= c("red",'darkorange','magenta','blue','black'))
-mtext(expression(paste(Redshift)), side = 2, cex = 1, line = 3.2, col = "black")
-median(x);median(y);median(z)
-# $conf te da los extremos de los notches
-boxplot.stats(x, coef = 1.5, do.conf = TRUE, do.out = FALSE)$conf
-boxplot.stats(y, coef = 1.5, do.conf = TRUE, do.out = FALSE)$conf
-# mediana
-#median(x);median(y);median(z)
 
 # ------------------------------------------------------
 # -----------Sigv----------------------------------
 # ------------------------------------------------------
-x <- subset(S$sigv, S$zmedian <= z_max) #nodos
+x <- S$sigv #nodos
 y <- SS$sigv #grupos FoF
 z <- FF$sigv #filamentos
 w <- Gf$sigv #campo
@@ -289,9 +263,35 @@ boxplot.stats(y, coef = 1.5, do.conf = TRUE, do.out = FALSE)$conf
 median(x);median(y);median(z)
 
 # ------------------------------------------------------
+# -----------Redshifth----------------------------------
+# ------------------------------------------------------
+x <-  S$zmedian #nodos
+y <- SS$zmedian #grupos FoF
+z <- FF$zmedian #filamentos
+w <- Gf$zmedian #campo
+v <- VG$zmedian #voids
+
+#boxplot(x,y,z,w,v,	
+boxplot(x,z,y,w,v,	
+	las = 1,notch = TRUE,varwidth = TRUE,outline = FALSE,
+        #ylim = c(0,0.2),
+	cex.axis=1.2,
+#	lwd=c(1.2,1.2,1.5),
+	xaxt="n",
+        #col= c("red",'magenta','darkorange','blue','black'))
+        col= c("red",'darkorange','magenta','blue','black'))
+mtext(expression(paste(Redshift)), side = 2, cex = 1, line = 3.2, col = "black")
+median(x);median(y);median(z)
+# $conf te da los extremos de los notches
+boxplot.stats(x, coef = 1.5, do.conf = TRUE, do.out = FALSE)$conf
+boxplot.stats(y, coef = 1.5, do.conf = TRUE, do.out = FALSE)$conf
+# mediana
+#median(x);median(y);median(z)
+
+# ------------------------------------------------------
 # -----------mu----------------------------------
 # ------------------------------------------------------
-x <-  subset(S$mu, S$zmedian <= z_max)  #nodos
+x <-  S$mu  #nodos
 y <- SS$mu #grupos FoF
 z <- FF$mu #filamentos
 w <- Gf$mu #campo
@@ -319,7 +319,7 @@ median(x);median(y);median(z)
 # ------------------------------------------------------
 # -----------mabs1----------------------------------
 # ------------------------------------------------------
-x <- subset(S$rabs1, S$zmedian <= z_max)  #nodos
+x <- S$rabs1  #nodos
 y <- SS$rabs1 #grupos FoF
 z <- FF$rabs1 #filamentos
 w <- Gf$rabs1 #campo
@@ -347,7 +347,7 @@ median(x);median(y);median(z)
 # ------------------------------------------------------
 # -----------titaG----------------------------------
 # ------------------------------------------------------
-x <- subset(S$radio_mins, S$zmedian <= z_max)  #nodos
+x <- S$radio_mins #nodos
 y <- SS$radio_mins #grupos FoF
 z <- FF$radio_mins #filamentos
 w <- Gf$radio_mins #campo
@@ -377,7 +377,7 @@ median(x);median(y);median(z)
 # ------------------------------------------------------
 # -----------rproy----------------------------------
 # ------------------------------------------------------
-x <- subset(S$rp, S$zmedian <= z_max)  #nodos
+x <- S$rp  #nodos
 y <- SS$rp #grupos FoF
 z <- FF$rp #filamentos
 w <- Gf$rp #campo
@@ -401,7 +401,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 # ------------------------------------------------------
 # -----------dij----------------------------------
 # ------------------------------------------------------
-x <- subset(S$dij*1000., S$zmedian <= z_max)  #nodos
+x <- S$dij*1000.  #nodos
 y <- SS$dij*1000. #grupos FoF
 z <- FF$dij*1000. #filamentos
 w <- Gf$dij*1000. #campo
@@ -417,7 +417,6 @@ boxplot(x,z,y,w,v,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
         col= c("red",'darkorange','magenta','blue','black'))
 laby=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -425,7 +424,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 # ------------------------------------------------------
 # -----------tcr----------------------------------
 # ------------------------------------------------------
-x <- subset(S$tcr, S$zmedian <= z_max)  #nodos
+x <- S$tcr  #nodos
 y <- SS$tcr #grupos FoF
 z <- FF$tcr #filamentos
 w <- Gf$tcr #campo
@@ -441,9 +440,8 @@ boxplot(x,z,y,w,v,
         #ylim = c(0,0.2),
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
-	#xaxt="n",
+	xaxt="n",
 	#names=c('N','GG','F','C','V'),
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
         col= c("red",'darkorange','magenta','blue','black'))
 laby=TeX('$H_0 \\, t_{cr}$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -463,7 +461,29 @@ boxplot(nodo_dif_2bri,fil_dif_2bri,Fof_dif_2bri,cam_dif_2bri,vv_dif_2bri,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{L}$'),TeX('$CG_{F}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
+	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
+        col= c("red",'darkorange','magenta','blue','black'))
+
+laby=TeX('$m_2 -m_1$ ')
+mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
+
+x <- S$rabs2 - S$rabs1 #nodos
+y <- SS$rabs2 - SS$rabs1 #grupos FoF
+z <- FF$rabs2 - FF$rabs1 #filamentos
+w <- Gf$rabs2 - Gf$rabs1 #campo
+#w <- (subset(w,w>0.3)
+v <- VG$rabs2 - VG$rabs1 #voids
+
+boxplot(x,z,y,w,v,
+	las = 1,
+	notch = TRUE,
+	varwidth = TRUE,
+	outline = FALSE,
+        #ylim = c(0,0.2),
+	cex.axis=1.2,
+#	lwd=c(1.2,1.2,1.5),
+	#xaxt="n",
+	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
         col= c("red",'darkorange','magenta','blue','black'))
 
 laby=TeX('$M_2 -M_1$ ')
@@ -483,7 +503,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 #####################################
 #####################################
 
-
+par(ask=TRUE)
 
 #pdf("boxplot_b.pdf")
 par(family="serif")
@@ -503,32 +523,11 @@ par(mar = c(0, 2, 0, 3), oma = c(4, 3, 3, 0)) #pegame este boxplot
 
 colores=c("red",'darkorange','magenta','blue','darkgreen','purple')
 
-# ------------------------------------------------------
-# -----------Redshifth----------------------------------
-# ------------------------------------------------------
-z_max=0.087
-x <-  subset(S$zmedian,S$zmedian <= z_max) #nodos
-y <- SS$zmedian #grupos FoF
-z <- FF$zmedian #filamentos
-w <- Gf$zmedian #campo
-v <- VG$zmedian #voids
-vr <- subset(VG$zmedian,VG$tipo==0) #voids
-vs <- subset(VG$zmedian,VG$tipo==1) #voids
-
-
-boxplot(x,z,y,w,vs,vr,	
-	las = 1,notch = TRUE,varwidth = TRUE,outline = FALSE,
-        #ylim = c(0,0.2),
-	cex.axis=1.2,
-#	lwd=c(1.2,1.2,1.5),
-	xaxt="n",
-        col= colores)
-mtext(expression(paste(Redshift)), side = 2, cex = 1, line = 3.2, col = "black")
 
 # ------------------------------------------------------
 # -----------Sigv----------------------------------
 # ------------------------------------------------------
-x <- subset(S$sigv, S$zmedian <= z_max) #nodos
+x <- S$sigv #nodos
 y <- SS$sigv #grupos FoF
 z <- FF$sigv #filamentos
 w <- Gf$sigv #campo
@@ -550,9 +549,30 @@ laby=TeX('$\\sigma$ \\[km s$^{-1}$\\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
 # ------------------------------------------------------
+# -----------Redshifth----------------------------------
+# ------------------------------------------------------
+x <-  S$zmedian #nodos
+y <- SS$zmedian #grupos FoF
+z <- FF$zmedian #filamentos
+w <- Gf$zmedian #campo
+v <- VG$zmedian #voids
+vr <- subset(VG$zmedian,VG$tipo==0) #voids
+vs <- subset(VG$zmedian,VG$tipo==1) #voids
+
+
+boxplot(x,z,y,w,vs,vr,	
+	las = 1,notch = TRUE,varwidth = TRUE,outline = FALSE,
+        #ylim = c(0,0.2),
+	cex.axis=1.2,
+#	lwd=c(1.2,1.2,1.5),
+	xaxt="n",
+        col= colores)
+mtext(expression(paste(Redshift)), side = 2, cex = 1, line = 3.2, col = "black")
+
+# ------------------------------------------------------
 # -----------mu----------------------------------
 # ------------------------------------------------------
-x <-  subset(S$mu, S$zmedian <= z_max)  #nodos
+x <-  S$mu  #nodos
 y <- SS$mu #grupos FoF
 z <- FF$mu #filamentos
 w <- Gf$mu #campo
@@ -576,7 +596,7 @@ mtext(expression(paste(mu)), side = 2, cex = 1, line = 3.2, col = "black")
 # ------------------------------------------------------
 # -----------mabs1----------------------------------
 # ------------------------------------------------------
-x <- subset(S$rabs1, S$zmedian <= z_max)  #nodos
+x <- S$rabs1  #nodos
 y <- SS$rabs1 #grupos FoF
 z <- FF$rabs1 #filamentos
 w <- Gf$rabs1 #campo
@@ -600,7 +620,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 # ------------------------------------------------------
 # -----------titaG----------------------------------
 # ------------------------------------------------------
-x <- subset(S$radio_mins, S$zmedian <= z_max)  #nodos
+x <- S$radio_mins  #nodos
 y <- SS$radio_mins #grupos FoF
 z <- FF$radio_mins #filamentos
 w <- Gf$radio_mins #campo
@@ -624,7 +644,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 # ------------------------------------------------------
 # -----------rproy----------------------------------
 # ------------------------------------------------------
-x <- subset(S$rp, S$zmedian <= z_max)  #nodos
+x <- S$rp  #nodos
 y <- SS$rp #grupos FoF
 z <- FF$rp #filamentos
 w <- Gf$rp #campo
@@ -650,7 +670,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 # ------------------------------------------------------
 # -----------dij----------------------------------
 # ------------------------------------------------------
-x <- subset(S$dij*1000., S$zmedian <= z_max)  #nodos
+x <- S$dij*1000.  #nodos
 y <- SS$dij*1000. #grupos FoF
 z <- FF$dij*1000. #filamentos
 w <- Gf$dij*1000. #campo
@@ -667,7 +687,6 @@ boxplot(x,z,y,w,vs,vr,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
         col= colores)
 laby=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -675,7 +694,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 # ------------------------------------------------------
 # -----------tcr----------------------------------
 # ------------------------------------------------------
-x <- subset(S$tcr, S$zmedian <= z_max)  #nodos
+x <- S$tcr  #nodos
 y <- SS$tcr #grupos FoF
 z <- FF$tcr #filamentos
 w <- Gf$tcr #campo
@@ -691,8 +710,7 @@ boxplot(x,z,y,w,vs,vr,
         #ylim = c(0,0.2),
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
-	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+	xaxt="n",
         col= colores)
 
 laby=TeX('$H_0 \\, t_{cr}$ ')
@@ -712,13 +730,34 @@ boxplot(nodo_dif_2bri,fil_dif_2bri,Fof_dif_2bri,cam_dif_2bri,vs_dif_2bri,vr_dif_
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{L}$'),TeX('$CG_{F}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+        col= colores)
+
+laby=TeX('$m_2 -m_1$ ')
+mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
+
+x <-  S$rabs2 -  S$rabs1  #nodos
+y <- SS$rabs2 - SS$rabs1  #grupos FoF
+z <- FF$rabs2 - FF$rabs1  #filamentos
+w <- Gf$rabs2 - Gf$rabs1  #campo
+v <- VG$rabs2 - VG$rabs1  #campo
+vr <- subset(VG$rabs2-VG$rabs1,VG$tipo==0) #voids
+vs <- subset(VG$rabs2-VG$rabs1,VG$tipo==1) #voids
+
+boxplot(x,z,y,w,vs,vr,
+	las = 1,
+	notch = TRUE,
+	varwidth = TRUE,
+	outline = FALSE,
+        #ylim = c(0,2.5),
+	cex.axis=1.2,
+#	lwd=c(1.2,1.2,1.5),
+	#xaxt="n",
+	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
         col= colores)
 
 laby=TeX('$M_2 -M_1$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
-
-
 
 
 #dev.off()

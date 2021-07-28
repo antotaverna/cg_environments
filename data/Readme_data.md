@@ -10,6 +10,7 @@
 - mag_g : g-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
 - abs_r : r-band k-corrected absolute magnitud
 - abs_g : g-band k-corrected absolute magnitud
+- glx_pasiva : flag=1 (abs_g-abs_r.gt.0.72 - 0.03 \times (abs_r+20))
 
 ## **'tab_grupos.dat' y xxx_full** (Todos tienen las mismas propiedades)
 

@@ -36,10 +36,11 @@
 - rp:   Radio proyectado (radio mins en Kpc).
 - rabs2: Magnitud absoluta de la 2da galaxia mas brillante. 
 
-**Nota**: El archivo voids tiene una columna mas:
+**Nota**: El archivo voids tiene dos columnas mas:
 - tipo: void tipo R (flag=0) y tipo S (flag=1)
+- estado: void adentro (flag=-1) y void borde (flag=0)
 *********************************************************************************************************
 *********************************************************************************************************
 ## **'compact_in_all'**
-Es lo mismo que el archivo compact_for_vane Pero en la ultima fila se agrega el entorno (en character)
+Es lo mismo que el archivo compact_in_xxx Pero en la ultima fila se agrega el entorno (en character)
 

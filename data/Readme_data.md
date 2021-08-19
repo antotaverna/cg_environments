@@ -45,3 +45,10 @@
 ## **'compact_in_all'**
 Es lo mismo que el archivo compact_in_xxx Pero en la ultima fila se agrega el entorno (en character)
 
+## **tempel_limpio.dat**: DR12 SDSS sample of galaxies
+- galID   :ID galaxia (SDSS)
+- ra[rad] :Asención recta
+- dec[rad]:Declinacion
+- zCMB   :Galaxy redshift corrected to the CMB rest-frame.
+- rextAB :r-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
+- gextAB :g-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.

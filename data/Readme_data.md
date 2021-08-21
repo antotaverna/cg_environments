@@ -52,3 +52,10 @@ Es lo mismo que el archivo compact_in_xxx Pero en la ultima fila se agrega el en
 - zCMB   :Galaxy redshift corrected to the CMB rest-frame.
 - rextAB :r-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
 - gextAB :g-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
+
+## **tempel_Mr.dat**: 
+- Se le agregan 3 columnas al tempel_limpio.dat
+- rabs :r-band k-corrected absolute magnitude.
+- gabs :g-band k-corrected absolute magnitude.
+- Menv :absolute magntude "r", Menv= mlim - 25 -5*log(ld) -kr, (mlim=17.77) .
+

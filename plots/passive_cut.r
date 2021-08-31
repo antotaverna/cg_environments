@@ -1,8 +1,9 @@
-library(bootstrap); library(latex2exp); library(astrolibR)
+library(bootstrap);
+#library(latex2exp); library(astrolibR)
 #library(magicaxis)
 library(cosmoFns)
 
-tempel<-read.table("../data/tempel_Mr.dat")
+tempel<-read.table("../../tempel_Mr.dat")
 
 M_r1<-tempel$V7
 M_g1<-tempel$V8
@@ -16,8 +17,9 @@ color1= M_g-M_r
 #   PLOT    --------------
 #------------------------------------------------------------------------------------------------------
 #pdf("passive_cut.pdf")
+cairo_ps("passive_cut.eps")
 library(dplyr)
-library(TeX)
+#library()
 par(mfrow=c(1,1))
 par(mar=c(5,3,1,1))  #c(b,l,t,r)
 par(oma=c(0,1,1,1))  #c(b,l,t,r)
@@ -31,7 +33,7 @@ color1_n <- new_df[,2]
 
 #labx=TeX(' $\\M_r-5 \\, \\log{(h)}}\\]$')
 labx="M_r-5log(h)"
-plot(NA,xlim=c(-23,-18.5),ylim=c(0.3,1.0),xlab=labx,ylab='g-r',main='')
+plot(NA,xlim=c(-23,-17.5),ylim=c(0.3,1.0),xlab=labx,ylab='g-r',main='')
 points(M_g_n,color1_n,pch=16,cex=0.1,col='grey40')
 #points(G$Mag_r,color,pch=16,cex=0.2,col='red')
 
@@ -48,31 +50,50 @@ points(M_g_n,color1_n,pch=16,cex=0.1,col='grey40')
 #Ajustes Lineales
 #y=0.7-0.03*(G$Mag_r+20)
 #points(G$Mag_r,y,type='l',col='blue')
-y=0.8-0.03*(G$Mag_r+20)
-points(G$Mag_r,y,type='l',col='magenta')
-abline(h=0.740871152583451,lw=1, lty=1,col='darkgreen')
+x=seq(-24,-16,0.1)
+y=0.8-0.03*(x +20)
+points(x ,y,type='l',col='magenta')
+
 
 nn=read.table("gmm_intersect.dat")
-xx=c(-22.5,-21.75,-21.25,-20.75,-20.25,-19.75,-19.25)#,-18.5)
-yy=c(nn$V2[2],nn$V2[3],nn$V2[4],nn$V2[5],nn$V2[6],nn$V2[7],nn$V2[8])#,nn$V2[9])
-points(xx,yy,col="blue",pch=16)
+
+abline(h=nn$V3[1],lw=1, lty=1,col='darkgreen')
+
+xx=(nn$V1-nn$V2)/2.+nn$V2
+yy=nn$V3
+
+points(xx[-1],yy[-1],col="blue",pch=16)
 #points(xx,yy,col="blue",type="l")
 
 
 #Ajuste cuadratico
-p=poly(xx,yy, degree = 2)
-modelo_p <- lm(p)
-
-model <- lm(yy ~ poly(xx,2))
-coef1 <- lm(yy ~ xx + I(xx^2))$coef
+#p=poly(xx,yy, degree = 2)
+#modelo_p <- lm(p)
+xseq=seq(-24,-17,0.1)
+model <- lm(yy[-1] ~ poly(xx[-1],2))
+coef1 <- lm(yy[-1] ~ xx[-1] + I(xx[-1]^2))$coef
 lines(xseq,  coef1[3]*xseq^2+ coef1[2]*xseq+ coef1[1], col='red')
 
 
 legend(-23.0, 0.45, legend=c("Blanton+07","Total range [-23,-17]","Nuestro spliteador","fit cuadratico"),
        col=c("magenta","darkgreen", "blue","red"), lty=1, cex=0.8)
 
+#> coef1[3]
+#    I(xx^2) 
+#-0,00898032
 
 
+#> coef1[2]
+#        xx 
+#-0,3985622 
+
+#> coef1[1]
+#(Intercept) 
+#  -3,642692
+ 
+#-0,01059228 
+#-0,4648955
+#-4,321844
 
 #dev.off()
 

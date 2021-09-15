@@ -1,6 +1,6 @@
 # **Archivos:**
 ## **'tab_gal_grupos.dat'**
- #ngg,nk,alg,delg,zred,rmag,gmag,umag,gal_ID,r50,r90,r_abs,g_abs,u_abs,g_psv=1,g_early=1
+
 - GId: Compact Group ID. 
 - Nm: Galaxy index.
 - RA: Right Ascension (J2000).

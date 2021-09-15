@@ -1,6 +1,6 @@
 # **Archivos:**
 ## **'tab_gal_grupos.dat'**
-
+ #ngg,nk,alg,delg,zred,rmag,gmag,umag,gal_ID,r50,r90,r_abs,g_abs,u_abs,g_psv=1,g_early=1
 - GId: Compact Group ID. 
 - Nm: Galaxy index.
 - RA: Right Ascension (J2000).
@@ -8,11 +8,36 @@
 - Redshift: Galaxy redshift corrected to the CMB rest-frame.
 - mag_r : r-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
 - mag_g : g-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
-- abs_r : r-band k-corrected absolute magnitud
-- abs_g : g-band k-corrected absolute magnitud
-- glx_pasiva : flag=1 (abs_g-abs_r.gt.0.7 - 0.03 \times (abs_r+20))
+- mag_u : u-band observer-frame model apparent magnitud corrected for galactic extinction in AB system.
+- galID : galaxy ID-SDSS.  
+- r50: petrosian radius
+- r90: petrosian radius
+- abs_r : r-band k-corrected absolute magnitud.
+- abs_g : g-band k-corrected absolute magnitud.
+- abs_u : u-band k-corrected absolute magnitud.
+- glx_pasiva/red : flag=1 (abs_u-abs_r.gt.C(abs_r)).
+- glx_early-type : flag=1 (r90/r50.gt.2.5).
 
-## **'tab_grupos.dat' y xxx_full** (Todos tienen las mismas propiedades)
+## **'tab_grupos.dat'**
+
+- i_gru: ID del grupo compacto
+- n_mi:  Numeros de miembros 
+- Ra:    Asención recta
+- dec:   Declinación
+- z:     Redshift medio del CG
+- radio_mins: Tita_g /2 
+- mu:    Brillo superficial medio (banda r).
+- sigv:  Dispersión de velocidad
+- rmag_bri: Magnitud aparente de la galaxia mas brillate  
+- flag: Entero que señala que un Cg este o no contaminado (potencialmente). 
+- d_ij: Distancia mediana entre miembros. 
+- tcr:  Tiemto de crossing.
+- rp:   Radio proyectado (radio mins en Kpc).
+- rabs1: Magnitud absoluta de la galaxia mas brillante.
+- rabs2: Magnitud absoluta de la 2da galaxia mas brillante. 
+
+
+## **compact_in_xxx_full** (Todos tienen las mismas propiedades)
 
 - 'compact_in_gg_m3_full'
 - 'compact_in_node_m3_full'

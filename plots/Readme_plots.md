@@ -28,3 +28,8 @@ Redshift vs Mabs. volume-limited sample (vol_lim.pdf).
 
 ## aitoff.R
 aitoff (aitoff.pdf).
+
+## passive_cut.ipynb
+Corte en rojas/pasivas y azules/no pasivas
+- color_tempel_gmm_ur.eps 
+- passive_cut_ur.eps

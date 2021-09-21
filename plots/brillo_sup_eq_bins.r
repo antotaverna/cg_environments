@@ -1,5 +1,6 @@
 #source("brillo_sup_eq_bins.r")
 library(bootstrap); library(latex2exp); library(astrolibR); library(magicaxis)
+library(Hmisc)
 #
 #--------------------------------------------------------------
 # Galaxias con line ade emision son activas: type spectral 1 ,2 ,3 (e(a),e(b) , e(c))
@@ -7,7 +8,6 @@ library(bootstrap); library(latex2exp); library(astrolibR); library(magicaxis)
 SS<-read.table("../data/compact_in_gg_m3_full")      ;S<-read.table("../data/compact_in_node_m3_full")
 Gf<-read.table("../data/compact_in_field_m3_full");  FF<-read.table("../data/compact_in_filaments_m3_full")
 HH<-read.table("../data/tab_gal_gru.dat"); VG<-read.table("../data/compact_in_voids_m3_full")
-naranja <- rgb(1, 101/255, 0,1)
 
 
 colnames(SS)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)] <- c('igru','nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp','rabs2')
@@ -104,13 +104,14 @@ for(k in 1:bin2){
 laby=TeX('$\\sigma$') 
 labx=TeX('$M_{bri} - 5log_{10}h$')
 
+#pdf("scatter_mags_eq_bins.pdf")
 #pdf("scatter_mags_eq_bins_2.pdf")
 
 par(family="serif")
 par(cex.lab=1.5)       #Tamaño labels
 par(cex.axis=0.9)      #Tamaño números en ejes.
 par(lwd=1)
-par(cex=2)
+par(cex=1)
 par(mgp=c(1.,0.2,0))   #margen labels
 par(mar=c(0,3,0,1))  #c(b,l,t,r)
 par(oma=c(6,1,5,1))  #c(b,l,t,r)
@@ -149,11 +150,11 @@ tcr_vs=subset(VG$tcr,VG$tipo==1)
 
 return_fil=func_fil(R_fi,sig_fi,N_fi) #colmed_f,FL_f,error_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,type='l',ylim=c(100,600),xlim=c(-20,-23.),xlab='',ylab=TeX('$\\sigma$ \\[km s$^{-1}$\\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
-points(xx,yy,pch=16,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+plot(xx,yy,type='l',ylim=c(100,600),xlim=c(-20.0,-23.0),xlab='',ylab=TeX('$\\sigma$ \\[km s$^{-1}$\\]'),
+col="orange",main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
+points(xx,yy,pch=16,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
-#arrows(colmed_f,FL_f-error_f, colmed_f,FL_f+error_f,col=naranja,angle=90, code=3,length=0.1)
+#arrows(colmed_f,FL_f-error_f, colmed_f,FL_f+error_f,col="orange",angle=90, code=3,length=0.1)
 
 #----------
 return_gg=func_fil(R_gg,sig_gg,N_gg) #colmed_f,FL_f,error_f
@@ -188,9 +189,11 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
-legend(-20.,590,c("Node", "Filaments",'Loose','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
-text(-22.5,150,label='a)',cex=1.2)
+legend(-20.,590,c("Node", "Filaments",'Loose','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
+text(-22.5,150,label='A',cex=1.2)
 
+#axis(side=1, labels = FALSE)
+#minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -203,10 +206,10 @@ magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 return_fil=func_fil(R_fi,rp_fi,N_fi) #colmed_f,FL_f,error_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(20,130),xlim=c(-20,-23.),xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
-points(xx,yy,pch=16,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+col="orange",main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
+points(xx,yy,pch=16,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
-#arrows(colmed_f,FL_f-error_f, colmed_f,FL_f+error_f,col=naranja,angle=90, code=3,length=0.1)
+#arrows(colmed_f,FL_f-error_f, colmed_f,FL_f+error_f,col="orange",angle=90, code=3,length=0.1)
 
 #----------
 return_gg=func_fil(R_gg,rp_gg,N_gg) #colmed_f,FL_f,error_f
@@ -241,9 +244,11 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
-text(-22.5,30,label='b)',cex=1.2)
-#legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
+text(-22.5,30,label='B',cex=1.2)
+#legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
+axis(side=1, labels = FALSE)
+#axis(side=1, at=c(0.,0.2,0.4,0.6,0.8,1.0,1.2), labels = FALSE)
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -256,9 +261,9 @@ magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 #labx=TeX('$M_{bri}$')
 return_fil=func_fil(R_fi,tcr_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,type='l',ylim=c(0,0.09),xlim=c(-20,-23.),xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
-col=naranja,main='',lwd=2,asp=-5)#,xaxt='n',yaxt='n')
-points(xx,yy,pch=16,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+plot(xx,yy,type='l',ylim=c(0.0,0.09),xlim=c(-20,-23.),xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
+col="orange",main='',lwd=2,asp=-5)#,xaxt='n',yaxt='n')
+points(xx,yy,pch=16,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
@@ -294,9 +299,10 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
-text(-22.5,0.01,label='c)',cex=1.2)
+text(-22.5,0.01,label='C',cex=1.2)
 mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 1, line = 2.2, col = "black")
 
+axis(side=1, labels = FALSE)
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -315,8 +321,8 @@ xx_vv<-VG$mu
 return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(23,27),xlim=c(-20,-23.),xlab='',ylab=TeX('$\\mu$ \\[arcsec-2\\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
-points(xx,yy,pch=17,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+col="orange",main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
+points(xx,yy,pch=17,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
@@ -352,7 +358,7 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
-legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
+legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -372,8 +378,8 @@ xx_vv<-VG$dij
 return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(0,0.2),xlim=c(-20,-23.),xlab='',ylab=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
-points(xx,yy,pch=17,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+col="orange",main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
+points(xx,yy,pch=17,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
@@ -409,7 +415,7 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
-legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
+legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -428,8 +434,8 @@ xx_vv<-VG$radio_mins*2.
 return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(4,15),xlim=c(-20,-23.),xlab='',ylab=TeX('$\\theta$ \\[arcmin\\]'),
-col=naranja,main='',lwd=2,asp=-5)#,xaxt='n',yaxt='n')
-points(xx,yy,pch=17,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+col="orange",main='',lwd=2,asp=-5)#,xaxt='n',yaxt='n')
+points(xx,yy,pch=17,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
@@ -467,7 +473,7 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=
 
 mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 1, line = 2.2, col = "black")
 
-legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
+legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -541,8 +547,8 @@ xx_vv<-delta12_vv ;yy_vv<-VG$rp
 return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',xlim=c(0,3),ylim=c(20,140),xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
-points(xx,yy,pch=17,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+col="orange",main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
+points(xx,yy,pch=17,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
@@ -598,8 +604,8 @@ xx_vv<-delta12_vv ;yy_vv<-VG$sigv
 return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(100,600),xlim=c(0,3),xlab='',ylab=TeX('$\\sigma$ \\[km s$^{-1}$\\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
-points(xx,yy,pch=17,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+col="orange",main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
+points(xx,yy,pch=17,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
@@ -655,8 +661,8 @@ xx_vv<-delta12_vv ;yy_vv<-VG$tcr
 return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(0,0.1),xlim=c(0,3),xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
-col=naranja,main='',lwd=2,asp=-5)#,xaxt='n',yaxt='n')
-points(xx,yy,pch=17,type='p',col=naranja,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+col="orange",main='',lwd=2,asp=-5)#,xaxt='n',yaxt='n')
+points(xx,yy,pch=17,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
 polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
@@ -782,6 +788,7 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5)
 laby=TeX('$\\sigma$') 
 labx=TeX('$M_{bri} - 5log_{10}h$')
 
+#pdf("scatter_mags_eq_bins_vRyS.pdf")
 #pdf("scatter_mags_eq_bins_2_vRyS.pdf")
 
 par(family="serif")
@@ -828,8 +835,8 @@ tcr_vs=subset(VG$tcr,VG$tipo==1)
 return_fil=func_fil(R_fi,sig_fi,N_fi) #colmed_f,FL_f,error_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 laby=TeX('$\\sigma$ \\[km s$^{-1}$\\]')
-plot(xx,yy,ylim=limy,xlim=c(-20,-23.),xlab=c(100,600),ylab=laby,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,naranja)
+plot(xx,yy,ylim=c(100,600),xlim=c(-20,-23.),xlab=c(100,600),ylab=laby,xaxt='n',type="n")#,yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(R_gg,sig_gg,N_gg) #colmed_f,FL_f,error_f
@@ -857,7 +864,7 @@ xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'violet')
 
 
-legend(-20.,590,c("Node", "Filaments",'Loose','Field','Voids-S','Voids-R'),bty="n",lty=c(1,1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','darkgreen','violet'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
+legend(-20.,590,c("Node", "Filaments",'Loose','Field','Voids-S','Voids-R'),bty="n",lty=c(1,1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','darkgreen','violet'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
 text(-22.5,150,label='a)',cex=1.2)
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -872,8 +879,8 @@ magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 return_fil=func_fil(R_fi,rp_fi,N_fi) #colmed_f,FL_f,error_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(20,130),xlim=c(-20,-23.),xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,naranja)
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(R_gg,rp_gg,N_gg) #colmed_f,FL_f,error_f
@@ -916,8 +923,8 @@ magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 return_fil=func_fil(R_fi,tcr_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(0,0.09),xlim=c(-20,-23.),xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
-col=naranja,main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
-func_plot(xx,yy,naranja)
+col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(R_gg,tcr_gg,N_gg) #colmed_f,FL_f,error_f
@@ -969,8 +976,8 @@ xx_vs=subset(VG$mu,VG$tipo==1)
 return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(23,27),xlim=c(-20,-23.),xlab='',ylab=TeX('$\\mu$ \\[arcsec-2\\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,naranja)
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
@@ -998,7 +1005,7 @@ xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'violet')
 
 
-legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
+legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -1020,8 +1027,8 @@ xx_vs=subset(VG$dij,VG$tipo==1)
 return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(0,0.2),xlim=c(-20,-23.),xlab='',ylab=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,naranja)
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
@@ -1050,7 +1057,7 @@ func_plot(xx,yy,'violet')
 
 
 
-legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
+legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -1071,8 +1078,8 @@ xx_vs=subset(VG$radio_mins*2.,VG$tipo==1)
 return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(4,15),xlim=c(-20,-23.),xlab='',ylab=TeX('$\\theta$ \\[arcmin\\]'),
-col=naranja,main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
-func_plot(xx,yy,naranja)
+col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
@@ -1103,7 +1110,7 @@ func_plot(xx,yy,'violet')
 
 mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 1, line = 2.2, col = "black")
 
-legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',naranja,"magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
+legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -1181,8 +1188,8 @@ xx_vs<-delta12_vs ;yy_vs<-subset(VG$rp,VG$tipo==1)
 return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,xlim=c(0,3),ylim=c(20,140),xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,naranja)
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f
@@ -1231,8 +1238,8 @@ yy_vs<-subset(VG$sigv,VG$tipo==1)
 return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(100,600),xlim=c(0,3),xlab='',ylab=TeX('$\\sigma$ \\[km s$^{-1}$\\]'),
-col=naranja,main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,naranja)
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f
@@ -1283,8 +1290,8 @@ yy_vs<-subset(VG$tcr,VG$tipo==1)
 return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
 xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(0,0.1),xlim=c(0,3),xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
-col=naranja,main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
-func_plot(xx,yy,naranja)
+col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
+func_plot(xx,yy,"orange")
 
 #----------
 return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f

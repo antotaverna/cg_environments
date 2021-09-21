@@ -461,7 +461,8 @@ boxplot(nodo_dif_2bri,fil_dif_2bri,Fof_dif_2bri,cam_dif_2bri,vv_dif_2bri,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
+	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
+	names=c(TeX('$Node$'),TeX('$Fil$'),TeX('$Loose$'),TeX('$Non-Emb$'),TeX('$Void$')),
         col= c("red",'darkorange','magenta','blue','black'))
 
 laby=TeX('$m_2 -m_1$ ')
@@ -483,7 +484,8 @@ boxplot(x,z,y,w,v,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
+	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
+	names=c(TeX('$Node$'),TeX('$Fil$'),TeX('$Loose$'),TeX('$Non-Emb$'),TeX('$Void$')),
         col= c("red",'darkorange','magenta','blue','black'))
 
 laby=TeX('$M_2 -M_1$ ')
@@ -492,7 +494,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
 
 
-dev.off()
+#dev.off()
 
 
 #####################################
@@ -521,7 +523,7 @@ par(mar = c(0, 2, 0, 3), oma = c(4, 3, 3, 0)) #pegame este boxplot
 
 #par(mgp=c(1.8,0.4,0))      	        #margen labels
 
-colores=c("red",'darkorange','magenta','blue','darkgreen','purple')
+colores=c("red",'darkorange','magenta','blue','darkgreen','deepskyblue3')
 
 
 # ------------------------------------------------------
@@ -730,7 +732,8 @@ boxplot(nodo_dif_2bri,fil_dif_2bri,Fof_dif_2bri,cam_dif_2bri,vs_dif_2bri,vr_dif_
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+	names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
         col= colores)
 
 laby=TeX('$m_2 -m_1$ ')
@@ -753,7 +756,8 @@ boxplot(x,z,y,w,vs,vr,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
+	names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
         col= colores)
 
 laby=TeX('$M_2 -M_1$ ')
@@ -774,7 +778,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
 par(ask=TRUE)
 
-#cairo_pdf("boxplot.pdf")
+#cairo_pdf("boxplot_c.pdf")
 par(family="serif")
 par(cex.lab=1.)       #Tamaño labels
 par(cex.main=1.1)        #Tamaño título
@@ -790,7 +794,7 @@ par(mar = c(0, 2, 0, 3), oma = c(4, 3, 3, 0)) #pegame este boxplot
 
 #par(mgp=c(1.8,0.4,0))      	        #margen labels
 
-colores=c("red",'darkorange','magenta','blue','darkgreen','purple')
+colores=c("red",'darkorange','magenta','blue','darkgreen','deepskyblue3')
 
 
 # ------------------------------------------------------
@@ -999,7 +1003,8 @@ boxplot(nodo_dif_2bri,fil_dif_2bri,Fof_dif_2bri,cam_dif_2bri,vs_dif_2bri,vr_dif_
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_{brd}}$'),TeX('$CG_{V_{dnt}}$')),
+	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_{brd}}$'),TeX('$CG_{V_{dnt}}$')),
+	names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$V_{brd}$'),TeX('$V_{dnt}$')),
         col= colores)
 
 laby=TeX('$m_2 -m_1$ ')
@@ -1022,7 +1027,8 @@ boxplot(x,z,y,w,vs,vr,
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	#xaxt="n",
-	names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_{brd}}$'),TeX('$CG_{V_{dnt}}$')),
+	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_{brd}}$'),TeX('$CG_{V_{dnt}}$')),
+	names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$V_{brd}$'),TeX('$V_{dnt}$')),
         col= colores)
 
 laby=TeX('$M_2 -M_1$ ')

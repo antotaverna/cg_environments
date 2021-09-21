@@ -1,6 +1,6 @@
 # Plots
-## box_plot.r
-Realiza el box_plot de propiedaes de compactos (boxplot.pdf).  
+## boxplot.r
+Realiza el box_plot de propiedaes de compactos (boxplot.pdf, boxplot_b.pdf, boxplot_c.pdf).  
 
 
 ## brillo_superficial.r

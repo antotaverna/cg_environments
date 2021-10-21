@@ -70,6 +70,9 @@
 ## **'compact_in_all'**
 Es lo mismo que el archivo compact_in_xxx Pero en la ultima fila se agrega el entorno (en character)
 
+## **'compact_in_all_estado.csv'**
+Es lo mismo que el archivo compact_in_all Pero en la ultima fila se cambian las etiquetas de void voidIN y voidED
+
 ## **tempel_limpio.dat**: DR12 SDSS sample of galaxies
 - galID   :ID galaxia (SDSS)
 - ra[rad] :Asención recta

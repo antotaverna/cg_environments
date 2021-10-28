@@ -153,7 +153,7 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(100,600),xlim=limxmag,xlab='',ylab=TeX('$\\sigma$ \\[km s$^{-1}$\\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
 points(xx,yy,pch=16,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(1, 101/255, 0,0.5),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 #arrows(colmed_f,FL_f-error_f, colmed_f,FL_f+error_f,col="orange",angle=90, code=3,length=0.1)
 
 #----------
@@ -161,7 +161,7 @@ return_gg=func_fil(R_gg,sig_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 points(xx,yy,type='l',col='magenta',main='',lwd=2)
 points(xx,yy,pch=16,type='p',col='magenta',main='')
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(1,0,0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1,0,0,0.3),border=NA)
 #arrows(colmed_gg,FL_gg-error_gg, colmed_gg,FL_gg+error_gg,col='magenta',angle=90, code=3,length=0.1)
 
 #----------
@@ -169,7 +169,7 @@ return_no=func_fil(R_no,sig_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 points(xx,yy,pch=16,type='l',col='red',main='',lwd=2)
 points(xx,yy,pch=16,type='p',col='red',main='')
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(1,0,0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1,0,0,0.3),border=NA)
 #arrows(colmed_no,FL_no-error_no, colmed_no,FL_no+error_no, col = 'red', angle=90, code=3,length=0.1)
 
 #----------
@@ -177,7 +177,7 @@ return_cp=func_fil(R_cp,sig_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 points(xx,yy,type='l',col='darkblue',main='',lwd=2)
 points(xx,yy,pch=16,type='p',col='darkblue',main='')
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(0,0,1,0.5),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,1,0.5),border=NA)
 #arrows(colmed_cp,FL_cp-error_cp,colmed_cp,FL_cp+error_cp,col='darkblue',angle=90,code=3,length=0.1)
 
 #----------
@@ -185,7 +185,7 @@ return_vv=func_fil(R_vv,sig_vv,N_vv) #colmed_f,FL_f,error_f
 xx <- return_vv[[1]]; yy <- return_vv[[2]]; erry <- return_vv[[3]]
 points(xx,yy,type='l',col='black',main='',lwd=2)
 points(xx,yy,pch=16,type='p',col='black',main='')
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(0,0,0,0.4),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=NA)
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
@@ -210,7 +210,7 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(20,130),xlim=limxmag,xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
 points(xx,yy,pch=16,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(1, 101/255, 0,0.5),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 #arrows(colmed_f,FL_f-error_f, colmed_f,FL_f+error_f,col="orange",angle=90, code=3,length=0.1)
 
 #----------
@@ -218,7 +218,7 @@ return_gg=func_fil(R_gg,rp_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 points(xx,yy,type='l',col='magenta',main='',lwd=2)
 points(xx,yy,pch=16,type='p',col='magenta',main='')
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(1,0,0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1,0,0,0.3),border=NA)
 #arrows(colmed_gg,FL_gg-error_gg, colmed_gg,FL_gg+error_gg,col='magenta',angle=90, code=3,length=0.1)
 
 #----------
@@ -226,7 +226,7 @@ return_no=func_fil(R_no,rp_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 points(xx,yy,pch=16,type='l',col='red',main='',lwd=2)
 points(xx,yy,pch=16,type='p',col='red',main='')
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(1,0,0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1,0,0,0.3),border=NA)
 #arrows(colmed_no,FL_no-error_no, colmed_no,FL_no+error_no, col = 'red', angle=90, code=3,length=0.1)
 
 #----------
@@ -234,7 +234,7 @@ return_cp=func_fil(R_cp,rp_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 points(xx,yy,type='l',col='darkblue',main='',lwd=2)
 points(xx,yy,pch=16,type='p',col='darkblue',main='')
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(0,0,1,0.5),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,1,0.5),border=NA)
 #arrows(colmed_cp,FL_cp-error_cp,colmed_cp,FL_cp+error_cp,col='darkblue',angle=90,code=3,length=0.1)
 
 #----------
@@ -242,7 +242,7 @@ return_vv=func_fil(R_vv,rp_vv,N_vv) #colmed_f,FL_f,error_f
 xx <- return_vv[[1]]; yy <- return_vv[[2]]; erry <- return_vv[[3]]
 points(xx,yy,type='l',col='black',main='',lwd=2)
 points(xx,yy,pch=16,type='p',col='black',main='')
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(0,0,0,0.4),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0,0,0,0.4),border=NA)
 #arrows(colmed_vv,FL_vv-error_vv,colmed_vv,FL_vv+error_vv,col='black',angle=90,code=3,length=0.1)
 
 
@@ -266,7 +266,7 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,type='l',ylim=c(0.0,0.09),xlim=limxmag,xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
 col="orange",main='',lwd=2,asp=-5)#,xaxt='n',yaxt='n')
 points(xx,yy,pch=16,type='p',col="orange",main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
-polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rgb(1, 101/255, 0,0.5),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
 return_gg=func_fil(R_gg,tcr_gg,N_gg) #colmed_f,FL_f,error_f

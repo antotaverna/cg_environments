@@ -366,7 +366,7 @@ h=b+1 ; b=b+Nmi_ved[i+1]
 
 #------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------
-#cairo_pdf("boxplot.pdf")
+cairo_pdf("boxplot.pdf")
 #pdf("boxplot.pdf")
 par(family="serif")
 par(cex.lab=1.)       #Tamaño labels
@@ -689,7 +689,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
 
 
-#dev.off()
+dev.off()
 
 
 #####################################
@@ -702,7 +702,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
 par(ask=TRUE)
 
-#cairo_pdf("boxplot_b.pdf")
+cairo_pdf("boxplot_b.pdf")
 par(family="serif")
 par(cex.lab=1.)       #Tamaño labels
 par(cex.main=1.1)        #Tamaño título
@@ -971,14 +971,15 @@ boxplot(nodo_fp_gr,fil_fp_gr,Fof_fp_gr,cam_fp_gr,vs_fp_gr,vr_fp_gr,
     ylim = c(0,1.1),
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
-	#xaxt="n",
+	xaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
 	names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
-        col= colores)
+    col= colores)
 
-laby=TeX('$Frac \\, passive \\, glxs$ ')
+laby=TeX('$Frac \\, red \\, glxs$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
-
+mtext(c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),at=c(1,2,3,4,5,6), side =1, cex = 1, line = 1.2, col = "black")
+axis(side=1, cex.axis=1.5, label=FALSE)
 # ------------------------------------------------------
 # ----------- frac early - -----------------------------
 # ------------------------------------------------------
@@ -991,18 +992,20 @@ boxplot(nodo_fe_gr,fil_fe_gr,Fof_fe_gr,cam_fe_gr,vs_fp_gr,vr_fp_gr,
     ylim = c(0,1.1),
 	cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
-	#xaxt="n",
+	xaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
-	names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
+	#names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
         col= colores)
 
 laby=TeX('$Frac \\, early \\, glxs$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
+mtext(c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),at=c(1,2,3,4,5,6), side =1, cex = 1, line = 1.2, col = "black")
+axis(side=1, cex.axis=1.5, label=FALSE)
 
 
 
 
-#dev.off()
+dev.off()
 
 
 
@@ -1016,7 +1019,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
 par(ask=TRUE)
 
-#cairo_pdf("boxplot_c.pdf")
+cairo_pdf("boxplot_c.pdf")
 par(family="serif")
 par(cex.lab=1.)       #Tamaño labels
 par(cex.main=1.1)        #Tamaño título
@@ -1313,7 +1316,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
 
 
-#dev.off()
+dev.off()
 
 
 

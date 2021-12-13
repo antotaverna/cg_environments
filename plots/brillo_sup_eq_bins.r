@@ -772,6 +772,30 @@ for(k in 1:bin2){
    error2_f[k]=dM
   }
 
+#------------------BOOTSTRAP
+boot=250; ff=0; jj=0
+count_ff<-vector(mode="logical",boot) 
+for(k in 1:bin2){
+    r<-a_f[1:count_f[k]] #;  rr<-aa_f[1:new_count_f[k],k]
+    theta <- function(r){r}  ;  results<-bootstrap(r,boot,theta)
+#   theta <- function(rr){rr};results2<-bootstrap(rr,boot,theta)
+    for(i in 1:boot){
+      for(hh in 1:count_f[k]){
+          try({jj=jj+results$thetastar[hh,i]}, silent=TRUE)
+      }
+      
+      count_ff[i]<-jj/count_f[k] 
+
+     ff=0; jj=0
+     }
+     error_f[k]<-sd(count_ff)
+   }
+  for(k in 1:bin2){
+  if(error_f[k] == 0){error_f[k] = 0.02}
+  }
+#------------------
+
+
   result=data.frame(colmed_f,FL_f,error_f)
   return(result)
 } #fin function
@@ -789,7 +813,7 @@ func_plot <- function(xx,yy,cc){
 #------------------PLOT
 points(xx,yy,type='l',col=cc,main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
 points(xx,yy,pch=16,type='p',col=cc,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
-polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
+#polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 } #fin function
 #-------------------------------------------
 #-------------------------------------------
@@ -845,34 +869,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 laby=TeX('$\\sigma$ \\[km s$^{-1}$\\]')
 plot(xx,yy,ylim=c(100,600),xlim=limxmag,xlab=c(100,600),ylab=laby,xaxt='n',type="n")#,yaxt='n')
 func_plot(xx,yy,"orange")
-#points(xx,yy,type='l',col='orange',main='',lwd=2)
-#points(xx,yy,pch=16,type='p',col='orange',main='')
-#polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1,0,0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 0, 0,0.3),border=NA)
 
 #----------
 return_gg=func_fil(R_gg,sig_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1,0,0,0.3),border=NA)
 
 #----------
 return_no=func_fil(R_no,sig_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
 
 #----------
 return_cp=func_fil(R_cp,sig_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0, 0, 1,0.3),border=NA)
 
 #----------
 return_vs=func_fil(R_vs,sig_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0, 1, 0,0.3),border=NA)
 
 #----------
 return_vr=func_fil(R_vr,sig_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 1, 0,0.3),border=NA)
 
 
 legend(-23.,590,c("Node", "Filaments",'Loose'),bty="n",lty=c(1,1,1,1,1,1), col=c('red',"orange","magenta"),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))

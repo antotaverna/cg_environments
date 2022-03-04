@@ -26,6 +26,22 @@ colnames(HH)[c(1,2,3,4,5,6,7)] <-c("GId", "Nm", "RA", "Dec", "Redshift", "mag_r"
 bin2=3
 #--------
 
+#-------- COLORS ------------- 
+rojo    <- rgb(1,0,0,1)
+naranja <- rgb(1, 101/255, 0,1)
+verde   <- rgb(24/255, 98/255, 24/255,1)
+azul    <- rgb(0,0,1,1)
+
+#ERROR
+rojo2      <- rgb(1, 0, 0,0.3)
+magenta2   <- rgb(255/255,0,255/255,0.4)
+naranja2   <- rgb(1, 101/255, 0,0.5)
+aqua2      <- rgb(30/255, 212/255, 218/255,0.3)
+verde2     <- rgb( 8/255, 95/255, 22/255,0.7)
+azul2      <- rgb(0, 0, 204/204,0.5)
+#--------         
+                
+
 #------------------------------------------------------------------------------------------------------------
 # ------ CG in filaments-------------------------------------------------------------------------------------
 R_no<-S$rabs1
@@ -723,6 +739,8 @@ magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 ##################################################
 par(ask=T)
 
+#pdf("scatter_mags_eq_bins_vRyS.pdf")
+#pdf("scatter_mags_eq_bins_2_vRyS.pdf")
 
 #--------
 #------------------------------------------------------------------------------------------------------------
@@ -820,8 +838,6 @@ points(xx,yy,pch=16,type='p',col=cc,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1
 laby=TeX('$\\sigma$') 
 labx=TeX('$M_{bri} - 5log_{10}h$')
 
-#pdf("scatter_mags_eq_bins_vRyS.pdf")
-#pdf("scatter_mags_eq_bins_2_vRyS.pdf")
 
 par(family="serif")
 par(cex.lab=1.1)       #Tamaño labels
@@ -869,37 +885,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 laby=TeX('$\\sigma$ \\[km s$^{-1}$\\]')
 plot(xx,yy,ylim=c(100,600),xlim=limxmag,xlab=c(100,600),ylab=laby,xaxt='n',type="n")#,yaxt='n')
 func_plot(xx,yy,"orange")
-polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 0, 0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(R_gg,sig_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
-polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1,0,0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(R_no,sig_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
-polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(R_cp,sig_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
-polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0, 0, 1,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(R_vs,sig_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
-polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(0, 1, 0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(R_vr,sig_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
-polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 1, 0,0.3),border=NA)
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=aqua2,border=NA)
 
 
 legend(-23.,590,c("Node", "Filaments",'Loose'),bty="n",lty=c(1,1,1,1,1,1), col=c('red',"orange","magenta"),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
@@ -921,31 +937,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(20,130),xlim=limxmag,xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
 func_plot(xx,yy,"orange")
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(R_gg,rp_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(R_no,rp_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(R_cp,rp_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(R_vs,rp_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(R_vr,rp_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=aqua2,border=NA)
 
 
 text(-22.5,30,label='B',cex=1.2)
@@ -965,31 +987,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(0,0.09),xlim=limxmag,xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
 col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
 func_plot(xx,yy,"orange")
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(R_gg,tcr_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(R_no,tcr_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(R_cp,tcr_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(R_vs,tcr_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(R_vr,tcr_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=aqua2,border=NA)
 
 
 
@@ -1018,31 +1046,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(23,27),xlim=limxmag,xlab='',ylab=TeX('$\\mu$ \\[arcsec-2\\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
 func_plot(xx,yy,"orange")
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(R_no,xx_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(R_cp,xx_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(R_vs,xx_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(R_vr,xx_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=aqua2,border=NA)
 
 
 legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
@@ -1069,31 +1103,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(0,0.2),xlim=limxmag,xlab='',ylab=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
 func_plot(xx,yy,"orange")
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(R_no,xx_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(R_cp,xx_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(R_vs,xx_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(R_vr,xx_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=aqua2,border=NA)
 
 
 
@@ -1120,31 +1160,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(4,15),xlim=limxmag,xlab='',ylab=TeX('$\\theta$ \\[arcmin\\]'),
 col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
 func_plot(xx,yy,"orange")
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(R_no,xx_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(R_cp,xx_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(R_vs,xx_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(R_vr,xx_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=aqua2,border=NA)
 
 
 
@@ -1230,31 +1276,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,xlim=c(0,3),ylim=c(20,140),xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
 func_plot(xx,yy,"orange")
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(xx_no,yy_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(xx_cp,yy_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(xx_vs,yy_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(xx_vr,yy_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=aqua2,border=NA)
 
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -1280,31 +1332,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(100,600),xlim=c(0,3),xlab='',ylab=TeX('$\\sigma$ \\[km s$^{-1}$\\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
 func_plot(xx,yy,"orange")
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(xx_no,yy_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(xx_cp,yy_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(xx_vs,yy_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(xx_vr,yy_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=aqua2,border=NA)
 
 
 
@@ -1332,31 +1390,37 @@ xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 plot(xx,yy,ylim=c(0,0.1),xlim=c(0,3),xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
 col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
 func_plot(xx,yy,"orange")
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=naranja2,border=NA)
 
 #----------
 return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f
 xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
 func_plot(xx,yy,'magenta')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=magenta2,border=NA)
 
 #----------
 return_no=func_fil(xx_no,yy_no,N_no) #colmed_f,FL_f,error_f
 xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
 func_plot(xx,yy,'red')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rojo2,border=NA)
 
 #----------
 return_cp=func_fil(xx_cp,yy_cp,N_cp) #colmed_f,FL_f,error_f
 xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
 func_plot(xx,yy,'darkblue')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=azul2,border=NA)
 
 #----------
 return_vs=func_fil(xx_vs,yy_vs,N_vs) #colmed_f,FL_f,error_f
 xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
 func_plot(xx,yy,'darkgreen')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=verde2,border=NA)
 
 #----------
 return_vr=func_fil(xx_vr,yy_vr,N_vr) #colmed_f,FL_f,error_f
 xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
 func_plot(xx,yy,'Deepskyblue3')
+polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=aqua2,border=NA)
 
 
 mtext(expression(paste(M[2],"-",M[1])), side=1, line=2, cex=0.8)
@@ -1387,6 +1451,8 @@ magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 par(ask=T)
 
 
+#pdf("scatter_mags_eq_bins_vDyB.pdf")
+#pdf("scatter_mags_eq_bins_2_vDyB.pdf")
 #--------
 #------------------------------------------------------------------------------------------------------------
 # ------ CG in filaments-------------------------------------------------------------------------------------
@@ -1459,8 +1525,6 @@ polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=rgb(1, 101/255, 0,0.5)
 laby=TeX('$\\sigma$') 
 labx=TeX('$M_{bri} - 5log_{10}h$')
 
-#pdf("scatter_mags_eq_bins_vDyB.pdf")
-#pdf("scatter_mags_eq_bins_2_vDyB.pdf")
 
 par(family="serif")
 par(cex.lab=1.1)       #Tamaño labels

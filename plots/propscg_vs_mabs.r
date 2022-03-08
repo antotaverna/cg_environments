@@ -32,6 +32,8 @@ bin2=3
 #--------
 ################################################################
 result <- data.frame()
+xmed<-vector() ; ymed<-vector()
+ic1<-vector()  ; ic2<-vector()
 
 func_fil <- function(arg1,arg2,arg3){
 	# arg1 = Mr o deltaM
@@ -46,7 +48,13 @@ func_fil <- function(arg1,arg2,arg3){
     for(i in 1:3){
     xmed[i]=mean(arg1[q==i])
     ymed[i]=mean(arg2[q==i])
+    ic1[i]=boxplot(arg2[q==i], plot=F)$conf[1]
+    ic2[i]=boxplot(arg2[q==i], plot=F)$conf[2]
     }
+
+    #------------Confidence Interval
+    
+
 
 
 	#------------------BOOTSTRAP
@@ -75,7 +83,7 @@ func_fil <- function(arg1,arg2,arg3){
            if(error_f[k] == 0){error_f[k] = 0.02}
         }
     
-        result=data.frame(xmed,ymed,error_f)
+        result=data.frame(xmed,ymed,error_f,ic1,ic2)
         return(result)
 } #fin function
 ################################################################
@@ -90,22 +98,27 @@ col2alpha <- function(col, alpha) {
 
 #-------------------------------------------
 #-------------------------------------------
-func_plot <- function(xx,yy,cc){
+func_plot <- function(arg1,arg2,cc){
 	# arg1 = x
 	# arg2 = y
-	# arg3 = lim y
-	# arg4 = color
+	# arg3 = color
+    return_fil=func_fil(arg1,arg2)
+    xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
+    ic1 = return_fil[[4]]; ic2 = return_fil[[5]]
+
+
     #------------------PLOT
     points(xx,yy,type='l',col=cc,main='',lwd=2,asp=-5,xaxt='n')#,yaxt='n')
     points(xx,yy,pch=16,type='p',col=cc,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+
+    #points(xx,ic1,pch=16,type='p',col=cc,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
+    #points(xx,ic2,pch=16,type='p',col=cc,main='',lwd=2,asp=-5,xaxt='n',yaxt='n',cex=1)
     polygon(c(xx,rev(xx)),c(yy+erry,rev(yy-erry)),col=col2alpha(cc,0.3),border=NA)#
-    #polygon(c(xx,rev(xx)),c(yy+erry*0.5,rev(yy-erry*0.5)),col=col2alpha(cc,0.3),border=NA)#
+    #polygon(c(xx,rev(xx)),c(ic1,rev(ic2)),col=col2alpha(cc,0.3),border=NA)#
 } #fin function
 
 #-------------------------------------------
 #-------------------------------------------
-laby=TeX('$\\sigma$') 
-labx=TeX('$M_{bri} - 5log_{10}h$')
 
 #cairo_pdf("scatter_mags_quartiles.pdf")
 
@@ -148,44 +161,32 @@ tcr_vs=subset(VG$tcr,VG$tipo==1)
 ###################################################################
 ######################### Mr vs Sigma #############################
 ###################################################################
-limxmag=c(-23.0,-20.0)
+limxmag=c(-22.8,-20.2)
+labx=TeX('$M_{bri} - 5log_{10}h$')
 
-return_fil=func_fil(R_fi,sig_fi,N_fi)
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
 laby=TeX('$\\sigma$ \\[km s$^{-1}$\\]')
-plot(xx,yy,ylim=c(100,600),xlim=limxmag,xlab=c(100,600),ylab=laby,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,"orange")
+plot(R_fi,sig_fi,ylim=c(120,450),xlim=limxmag,xlab='',ylab=laby,xaxt='n',type="n",log='y')#,yaxt='n')
 
+func_plot(R_fi,sig_fi,"orange")
 #----------
-return_gg=func_fil(R_gg,sig_gg,N_gg)
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
-
+func_plot(R_gg,sig_gg,'magenta')
 #----------
-return_no=func_fil(R_no,sig_no,N_no)
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
+func_plot(R_no,sig_no,'red')
 #----------
-return_cp=func_fil(R_cp,sig_cp,N_cp)
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
+func_plot(R_cp,sig_cp,'darkblue')
 #----------
-return_vs=func_fil(R_vs,sig_vs,N_vs)
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
+func_plot(R_vs,sig_vs,'darkgreen')
 #----------
-return_vr=func_fil(R_vr,sig_vr,N_vr)
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
+func_plot(R_vr,sig_vr,'Deepskyblue3')
 
+#dos filas
+#legend(-22.8,490,c("Node", "Filaments",'Loose'),bty="n",lty=c(1,1,1,1,1,1), col=c('red',"orange","magenta"),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
+#legend(-21.65,490,c('Non-Embedded','Voids-S','Voids-R'),bty="n",lty=c(1,1,1,1,1,1), col=c('darkblue','darkgreen','Deepskyblue3'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
 
-legend(-23.,590,c("Node", "Filaments",'Loose'),bty="n",lty=c(1,1,1,1,1,1), col=c('red',"orange","magenta"),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
-legend(-21.65,590,c('Non-Embedded','Voids-S','Voids-R'),bty="n",lty=c(1,1,1,1,1,1), col=c('darkblue','darkgreen','Deepskyblue3'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
+#una fila
+legend(-22.9,220,c("Node", "Filaments",'Loose','Non-Embedded','Voids-S','Voids-R'),bty="n", col=c('red',"orange","magenta",'darkblue','darkgreen','Deepskyblue3'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
 
-text(-22.5,150,label='A',cex=1.2)
+text(-20.5,150,label='A',cex=1.2)
 
 #magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 #magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -196,39 +197,23 @@ text(-22.5,150,label='A',cex=1.2)
 ######################### Mr vs Rproy #############################
 ###################################################################
 
-return_fil=func_fil(R_fi,rp_fi,N_fi) #colmed_f,FL_f,error_f
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,ylim=c(20,130),xlim=limxmag,xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
+plot(R_fi,rp_fi,ylim=c(40,125),xlim=limxmag,xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,"orange")
 
+func_plot(R_fi,rp_fi,"orange")
 #----------
-return_gg=func_fil(R_gg,rp_gg,N_gg) #colmed_f,FL_f,error_f
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
-
+func_plot(R_gg,rp_gg,'magenta')
 #----------
-return_no=func_fil(R_no,rp_no,N_no) #colmed_f,FL_f,error_f
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
+func_plot(R_no,rp_no,'red')
 #----------
-return_cp=func_fil(R_cp,rp_cp,N_cp) #colmed_f,FL_f,error_f
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
+func_plot(R_cp,rp_cp,'darkblue')
 #----------
-return_vs=func_fil(R_vs,rp_vs,N_vs) #colmed_f,FL_f,error_f
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
+func_plot(R_vs,rp_vs,'darkgreen')
 #----------
-return_vr=func_fil(R_vr,rp_vr,N_vr) #colmed_f,FL_f,error_f
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
+func_plot(R_vr,rp_vr,'Deepskyblue3')
 
 
-text(-22.5,30,label='B',cex=1.2)
+text(-22.5,45,label='B',cex=1.2)
 
 #magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 #magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -240,40 +225,23 @@ text(-22.5,30,label='B',cex=1.2)
 ######################### Mr vs tcr ###############################
 ###################################################################
 #labx=TeX('$M_{bri}$')
-return_fil=func_fil(R_fi,tcr_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,ylim=c(0,0.09),xlim=limxmag,xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
-col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
-func_plot(xx,yy,"orange")
+plot(R_fi,tcr_fi,ylim=c(0.01,0.11),xlim=limxmag,xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
+col="orange",main='',lwd=2,asp=-5,type="n",log='y')#,xaxt='n',yaxt='n')
 
+func_plot(R_fi,tcr_fi,"orange")
 #----------
-return_gg=func_fil(R_gg,tcr_gg,N_gg) #colmed_f,FL_f,error_f
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
-
+func_plot(R_gg,tcr_gg,'magenta')
 #----------
-return_no=func_fil(R_no,tcr_no,N_no) #colmed_f,FL_f,error_f
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
+func_plot(R_no,tcr_no,'red')
 #----------
-return_cp=func_fil(R_cp,tcr_cp,N_cp) #colmed_f,FL_f,error_f
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
+func_plot(R_cp,tcr_cp,'darkblue')
 #----------
-return_vs=func_fil(R_vs,tcr_vs,N_vs) #colmed_f,FL_f,error_f
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
+func_plot(R_vs,tcr_vs,'darkgreen')
 #----------
-return_vr=func_fil(R_vr,tcr_vr,N_vr) #colmed_f,FL_f,error_f
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
+func_plot(R_vr,tcr_vr,'Deepskyblue3')
 
 
-
-text(-22.5,0.01,label='C',cex=1.2)
+text(-22.5,0.015,label='C',cex=1.2)
 mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 0.8, line = 2.2, col = "black")
 
 #magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -293,36 +261,20 @@ xx_vv<-VG$mu
 xx_vr=subset(VG$mu,VG$tipo==0)
 xx_vs=subset(VG$mu,VG$tipo==1)
 
-return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,ylim=c(23,27),xlim=limxmag,xlab='',ylab=TeX('$\\mu$ \\[arcsec-2\\]'),
+plot(R_fi,xx_fi,ylim=c(24,26),xlim=limxmag,xlab='',ylab=TeX('$\\mu$ \\[arcsec-2\\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,"orange")
 
+func_plot(R_fi,xx_fi,"orange")
 #----------
-return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
-
+func_plot(R_gg,xx_gg,'magenta')
 #----------
-return_no=func_fil(R_no,xx_no,N_no) #colmed_f,FL_f,error_f
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
+func_plot(R_no,xx_no,'red')
 #----------
-return_cp=func_fil(R_cp,xx_cp,N_cp) #colmed_f,FL_f,error_f
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
+func_plot(R_cp,xx_cp,'darkblue')
 #----------
-return_vs=func_fil(R_vs,xx_vs,N_vs) #colmed_f,FL_f,error_f
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
+func_plot(R_vs,xx_vs,'darkgreen')
 #----------
-return_vr=func_fil(R_vr,xx_vr,N_vr) #colmed_f,FL_f,error_f
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
+func_plot(R_vr,xx_vr,'Deepskyblue3')
 
 
 legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
@@ -344,37 +296,20 @@ xx_vr=subset(VG$dij,VG$tipo==0)
 xx_vs=subset(VG$dij,VG$tipo==1)
 
 
-return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,ylim=c(0,0.2),xlim=limxmag,xlab='',ylab=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]'),
-col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,"orange")
+plot(R_fi,xx_fi,ylim=c(0.06,0.15),xlim=limxmag,xlab='',ylab=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]'),
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n",log='y')#,yaxt='n')
 
+func_plot(R_fi,xx_fi,"orange")
 #----------
-return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
-
+func_plot(R_gg,xx_gg,'magenta')
 #----------
-return_no=func_fil(R_no,xx_no,N_no) #colmed_f,FL_f,error_f
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
+func_plot(R_no,xx_no,'red')
 #----------
-return_cp=func_fil(R_cp,xx_cp,N_cp) #colmed_f,FL_f,error_f
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
+func_plot(R_cp,xx_cp,'darkblue')
 #----------
-return_vs=func_fil(R_vs,xx_vs,N_vs) #colmed_f,FL_f,error_f
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
+func_plot(R_vs,xx_vs,'darkgreen')
 #----------
-return_vr=func_fil(R_vr,xx_vr,N_vr) #colmed_f,FL_f,error_f
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
-
+func_plot(R_vr,xx_vr,'Deepskyblue3')
 
 
 legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
@@ -395,37 +330,20 @@ xx_vv<-VG$radio_mins*2.
 xx_vr=subset(VG$radio_mins*2.,VG$tipo==0)
 xx_vs=subset(VG$radio_mins*2.,VG$tipo==1)
 
-return_fil=func_fil(R_fi,xx_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,ylim=c(4,15),xlim=limxmag,xlab='',ylab=TeX('$\\theta$ \\[arcmin\\]'),
+plot(R_fi,xx_fi,ylim=c(4,17.9),xlim=limxmag,xlab='',ylab=TeX('$\\theta$ \\[arcmin\\]'),
 col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
-func_plot(xx,yy,"orange")
 
+func_plot(R_fi,xx_fi,"orange")
 #----------
-return_gg=func_fil(R_gg,xx_gg,N_gg) #colmed_f,FL_f,error_f
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
-
+func_plot(R_gg,xx_gg,'magenta')
 #----------
-return_no=func_fil(R_no,xx_no,N_no) #colmed_f,FL_f,error_f
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
+func_plot(R_no,xx_no,'red')
 #----------
-return_cp=func_fil(R_cp,xx_cp,N_cp) #colmed_f,FL_f,error_f
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
+func_plot(R_cp,xx_cp,'darkblue')
 #----------
-return_vs=func_fil(R_vs,xx_vs,N_vs) #colmed_f,FL_f,error_f
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
+func_plot(R_vs,xx_vs,'darkgreen')
 #----------
-return_vr=func_fil(R_vr,xx_vr,N_vr) #colmed_f,FL_f,error_f
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
-
+func_plot(R_vr,xx_vr,'Deepskyblue3')
 
 
 mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 0.8, line = 2.2, col = "black")
@@ -437,9 +355,11 @@ legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,
 #magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 #magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
+
 ###################################################################
-######################### DeltaM12 vs rp ##########################
+######################### DeltaM12 vs sigma #######################
 ###################################################################
+
 labx=TeX('$DeltaM_{12}$')
 
 delta12_no= S$rabs2- S$rabs1
@@ -454,6 +374,41 @@ a=c(delta12_no,delta12_gg,delta12_fi,delta12_cp,delta12_vv)
 amax=max(a)
 amin=min(a)
 
+xx_no<-delta12_no  ;yy_no<-S$sigv 
+xx_gg<-delta12_gg ;yy_gg<-SS$sigv 
+xx_fi<-delta12_fi ;yy_fi<-FF$sigv
+xx_cp<-delta12_cp ;yy_cp<-Gf$sigv 
+xx_vv<-delta12_vv ;yy_vv<-VG$sigv 
+xx_vr<-delta12_vr ;yy_vr<-subset(VG$sigv,VG$tipo==0) 
+xx_vs<-delta12_vs ;yy_vs<-subset(VG$sigv,VG$tipo==1) 
+
+plot(xx_fi,yy_fi,ylim=c(100,500),xlim=c(0,2.5),xlab='',ylab=TeX('$\\sigma$ \\[km s$^{-1}$\\]'),
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
+
+func_plot(xx_fi,yy_fi,"orange")
+#----------
+func_plot(xx_gg,yy_gg,'magenta')
+#----------
+func_plot(xx_no,yy_no,'red')
+#----------
+func_plot(xx_cp,yy_cp,'darkblue')
+#----------
+func_plot(xx_vs,yy_vs,'darkgreen')
+#----------
+func_plot(xx_vr,yy_vr,'Deepskyblue3')
+
+
+
+#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+
+###################################################################
+######################### DeltaM12 vs rp ##########################
+###################################################################
+labx=TeX('$DeltaM_{12}$')
+
 
 xx_no<-delta12_no ;yy_no<-S$rp 
 xx_gg<-delta12_gg ;yy_gg<-SS$rp 
@@ -464,36 +419,20 @@ xx_vr<-delta12_vr ;yy_vr<-subset(VG$rp,VG$tipo==0)
 xx_vs<-delta12_vs ;yy_vs<-subset(VG$rp,VG$tipo==1) 
 
 return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,xlim=c(0,3),ylim=c(20,140),xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
+plot(xx_fi,yy_fi,xlim=c(0,2.5),ylim=c(40,130),xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
 col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,"orange")
 
+func_plot(xx_fi,yy_fi,"orange")
 #----------
-return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
-
+func_plot(xx_gg,yy_gg,'magenta')
 #----------
-return_no=func_fil(xx_no,yy_no,N_no) #colmed_f,FL_f,error_f
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
+func_plot(xx_no,yy_no,'red')
 #----------
-return_cp=func_fil(xx_cp,yy_cp,N_cp) #colmed_f,FL_f,error_f
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
+func_plot(xx_cp,yy_cp,'darkblue')
 #----------
-return_vs=func_fil(xx_vs,yy_vs,N_vs) #colmed_f,FL_f,error_f
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
+func_plot(xx_vs,yy_vs,'darkgreen')
 #----------
-return_vr=func_fil(xx_vr,yy_vr,N_vr) #colmed_f,FL_f,error_f
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
-
+func_plot(xx_vr,yy_vr,'Deepskyblue3')
 
 #magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 #magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
@@ -501,58 +440,7 @@ func_plot(xx,yy,'Deepskyblue3')
 #magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 ###################################################################
-######################### DeltaM12 vs sigma #######################
-###################################################################
-
-labx=TeX('$DeltaM_{12}$')
-xx_no<-delta12_no  ;yy_no<-S$sigv 
-xx_gg<-delta12_gg ;yy_gg<-SS$sigv 
-xx_fi<-delta12_fi ;yy_fi<-FF$sigv
-xx_cp<-delta12_cp ;yy_cp<-Gf$sigv 
-xx_vv<-delta12_vv ;yy_vv<-VG$sigv 
-yy_vr<-subset(VG$sigv,VG$tipo==0)
-yy_vs<-subset(VG$sigv,VG$tipo==1)
-
-return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,ylim=c(100,600),xlim=c(0,3),xlab='',ylab=TeX('$\\sigma$ \\[km s$^{-1}$\\]'),
-col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-func_plot(xx,yy,"orange")
-
-#----------
-return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
-
-#----------
-return_no=func_fil(xx_no,yy_no,N_no) #colmed_f,FL_f,error_f
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
-#----------
-return_cp=func_fil(xx_cp,yy_cp,N_cp) #colmed_f,FL_f,error_f
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
-#----------
-return_vs=func_fil(xx_vs,yy_vs,N_vs) #colmed_f,FL_f,error_f
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
-#----------
-return_vr=func_fil(xx_vr,yy_vr,N_vr) #colmed_f,FL_f,error_f
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
-
-
-
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-
-###################################################################
-######################### DeltaM12 vs sigma #######################
+######################### DeltaM12 vs tcr #######################
 ###################################################################
 
 labx=TeX('$\\Delta M_{12}$')
@@ -565,36 +453,21 @@ yy_vr<-subset(VG$tcr,VG$tipo==0)
 yy_vs<-subset(VG$tcr,VG$tipo==1)
 
 
-return_fil=func_fil(xx_fi,yy_fi,N_fi) #count_f,prop_f,colmed_f,FL_f
-xx <- return_fil[[1]]; yy <- return_fil[[2]]; erry <- return_fil[[3]]
-plot(xx,yy,ylim=c(0,0.1),xlim=c(0,3),xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
+plot(xx_fi,yy_fi,ylim=c(0.01,0.15),xlim=c(0,2.5),xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
 col="orange",main='',lwd=2,asp=-5,type="n")#,xaxt='n',yaxt='n')
-func_plot(xx,yy,"orange")
 
-#----------
-return_gg=func_fil(xx_gg,yy_gg,N_gg) #colmed_f,FL_f,error_f
-xx <- return_gg[[1]]; yy <- return_gg[[2]]; erry <- return_gg[[3]]
-func_plot(xx,yy,'magenta')
 
+func_plot(xx_fi,yy_fi,"orange")
 #----------
-return_no=func_fil(xx_no,yy_no,N_no) #colmed_f,FL_f,error_f
-xx <- return_no[[1]]; yy <- return_no[[2]]; erry <- return_no[[3]]
-func_plot(xx,yy,'red')
-
+func_plot(xx_gg,yy_gg,'magenta')
 #----------
-return_cp=func_fil(xx_cp,yy_cp,N_cp) #colmed_f,FL_f,error_f
-xx <- return_cp[[1]]; yy <- return_cp[[2]]; erry <- return_cp[[3]]
-func_plot(xx,yy,'darkblue')
-
+func_plot(xx_no,yy_no,'red')
 #----------
-return_vs=func_fil(xx_vs,yy_vs,N_vs) #colmed_f,FL_f,error_f
-xx <- return_vs[[1]]; yy <- return_vs[[2]]; erry <- return_vs[[3]]
-func_plot(xx,yy,'darkgreen')
-
+func_plot(xx_cp,yy_cp,'darkblue')
 #----------
-return_vr=func_fil(xx_vr,yy_vr,N_vr) #colmed_f,FL_f,error_f
-xx <- return_vr[[1]]; yy <- return_vr[[2]]; erry <- return_vr[[3]]
-func_plot(xx,yy,'Deepskyblue3')
+func_plot(xx_vs,yy_vs,'darkgreen')
+#----------
+func_plot(xx_vr,yy_vr,'Deepskyblue3')
 
 
 mtext(expression(paste(M[2],"-",M[1])), side=1, line=2, cex=0.8)

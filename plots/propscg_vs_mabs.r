@@ -165,7 +165,7 @@ limxmag=c(-22.8,-20.2)
 labx=TeX('$M_{bri} - 5log_{10}h$')
 
 laby=TeX('$\\sigma$ \\[km s$^{-1}$\\]')
-plot(R_fi,sig_fi,ylim=c(120,450),xlim=limxmag,xlab='',ylab=laby,xaxt='n',type="n",log='y')#,yaxt='n')
+plot(R_fi,sig_fi,ylim=c(120,450),xlim=limxmag,xlab='',ylab=laby,type="n",xaxt='n',log='y')#,yaxt='n')
 
 func_plot(R_fi,sig_fi,"orange")
 #----------
@@ -185,13 +185,13 @@ func_plot(R_vr,sig_vr,'Deepskyblue3')
 
 #una fila
 legend(-22.9,220,c("Node", "Filaments",'Loose','Non-Embedded','Voids-S','Voids-R'),bty="n", col=c('red',"orange","magenta",'darkblue','darkgreen','Deepskyblue3'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
-
+logticks()
 text(-20.5,150,label='A',cex=1.2)
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 ###################################################################
 ######################### Mr vs Rproy #############################
@@ -215,10 +215,10 @@ func_plot(R_vr,rp_vr,'Deepskyblue3')
 
 text(-22.5,45,label='B',cex=1.2)
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 
 ###################################################################
@@ -244,10 +244,10 @@ func_plot(R_vr,tcr_vr,'Deepskyblue3')
 text(-22.5,0.015,label='C',cex=1.2)
 mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 0.8, line = 2.2, col = "black")
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 
 ###################################################################
@@ -279,10 +279,10 @@ func_plot(R_vr,xx_vr,'Deepskyblue3')
 
 legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 ###################################################################
 ######################### Mr vs dij ################################
@@ -314,10 +314,10 @@ func_plot(R_vr,xx_vr,'Deepskyblue3')
 
 legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 ###################################################################
 ######################### Mr vs tita ################################
@@ -350,10 +350,10 @@ mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 0.8, line = 2.2, col = "bla
 
 legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 
 ###################################################################
@@ -399,10 +399,10 @@ func_plot(xx_vr,yy_vr,'Deepskyblue3')
 
 
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 ###################################################################
 ######################### DeltaM12 vs rp ##########################
@@ -434,10 +434,10 @@ func_plot(xx_vs,yy_vs,'darkgreen')
 #----------
 func_plot(xx_vr,yy_vr,'Deepskyblue3')
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 ###################################################################
 ######################### DeltaM12 vs tcr #######################
@@ -473,10 +473,10 @@ func_plot(xx_vr,yy_vr,'Deepskyblue3')
 mtext(expression(paste(M[2],"-",M[1])), side=1, line=2, cex=0.8)
 #mtext(expression(Delta~price), side = 1, cex = 1, line = 2.2, col = "black")
 
-#magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-#magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
 #dev.off()
 

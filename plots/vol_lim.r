@@ -1,13 +1,17 @@
 #source("vol_lim.r")
-SS<-read.table("../muestras_finales/compact_in_gg_m3_full")
-S<-read.table("../muestras_finales/compact_in_node_m3_full")
-Gf<-read.table("../muestras_finales/compact_in_field_m3_full")
-FF<-read.table("../muestras_finales/compact_in_filaments_m3_full")
-VG<-read.table("../muestras_finales/compact_in_voids_m3_full")
 
-HH<-read.table("../catalogos/tab_gal_gru.dat")
+library(latex2exp)
+library(magicaxis)
+
+SS<-read.table("../data/compact_in_gg_m3_full")
+S<-read.table("../data/compact_in_node_m3_full")
+Gf<-read.table("../data/compact_in_field_m3_full")
+FF<-read.table("../data/compact_in_filaments_m3_full")
+VG<-read.table("../data/compact_in_voids_m3_full")
+
+#HH<-read.table("../catalogos/tab_gal_gru.dat")
 #gal<-read.table("catalogos/DR12_tempel.dat")
-gal<-read.table("../galgrufof_z_Mr.dat") # vol_samples_new.f
+gal<-read.table("../../galgrufof_z_Mr.dat") # vol_samples_new.f
 
 
 colnames(SS)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14)] <- c('igru','nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp')
@@ -20,7 +24,7 @@ colnames(FF)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14)] <- c("igru",'nmi','alcm','delc
 
 colnames(VG)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp')
 
-colnames(HH)[c(1,2,3,4,5,6,7)] <-c("GId", "Nm", "RA", "Dec", "Redshift", "mag_r", "mag_g")
+#colnames(HH)[c(1,2,3,4,5,6,7)] <-c("GId", "Nm", "RA", "Dec", "Redshift", "mag_r", "mag_g")
 
 z_no<-S$zmedian; R_no<-S$rabs1 
 
@@ -49,12 +53,18 @@ mag_env_kcorr_cg=mag_env_kcorr-3
 
 #pdf("vol_lim.pdf")
 
-plot(zgal,Mgal,ylim=c(-17,-23.2),xlim=c(0,0.19),pch='.',cex=0.5,col='gray',xlab='Redshift',ylab='Mr')
+
+par(mar=c(5,5,1,1))  #c(b,l,t,r)
+#par(oma=c(0,0,0,0))  #c(b,l,t,r)
+
+plot(zgal,Mgal,ylim=c(-17,-23.2),xlim=c(0,0.19),pch='.',cex=0.5,col='gray',
+     xlab='Redshift',ylab=TeX('$M_{bri}-5log_{10}(h)$'),cex.lab=1.8, cex.axis=1.5)
 points(z_no,R_no,pch=16,cex=0.6,col='red')
 points(z_fi,R_fi,pch=5,cex=0.6,col='darkorange')
 points(z_gg,R_gg,pch=0,cex=0.6,col='magenta')
 points(z_cp,R_cp,pch=4,cex=0.6,col='blue')
 points(z_vv,R_vv,pch=11,cex=0.6,col='black')
+magaxis(label=FALSE)
 
 abline(v=0.01,lty=2)
 #abline(v=0.1)
@@ -80,7 +90,7 @@ lines(med_zz,med_mm, type="l", col="black", lty=1)
 lines(med_zz,med_mm-3, type="l", col="black", lty=1)
 
 
-legend(0.12,-19.7, legend=c("Nodes","Filament", "Loose Groups","Field","Voids"),col=c('red',"darkorange",'magenta',"blue","black"), pch=c(16,5,0,4,11), cex=1.4,border = NULL,bty='n')
+legend(0.12,-19.7, legend=c("Nodes","Filament", "Loose Groups","Non-Embedded","Voids"),col=c('red',"darkorange",'magenta',"blue","black"), pch=c(16,5,0,4,11), cex=1.4,border = NULL,bty='n')
 
 #dev.off()
 

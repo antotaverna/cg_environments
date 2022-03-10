@@ -184,48 +184,58 @@ func_plot(R_vr,sig_vr,'Deepskyblue3')
 #legend(-21.65,490,c('Non-Embedded','Voids-S','Voids-R'),bty="n",lty=c(1,1,1,1,1,1), col=c('darkblue','darkgreen','Deepskyblue3'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
 
 #una fila
-legend(-22.9,220,c("Node", "Filaments",'Loose','Non-Embedded','Voids-S','Voids-R'),bty="n", col=c('red',"orange","magenta",'darkblue','darkgreen','Deepskyblue3'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
-logticks()
-text(-20.5,150,label='A',cex=1.2)
+legend(-22.9,220,c("Node", "Filaments",'Loose','Voids-S','Voids-R','Non-Embedded'),bty="n", col=c('red',"orange","magenta",'darkgreen','Deepskyblue3','darkblue'),horiz=FALSE,inset=0,cex=0.9,pch=c(16,16,16,16,16))
+text(-20.4,150,label='A',cex=1.2)
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+#magaxis(2,majorn=5, minorn=10, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2, tcl=0.3, labels=FALSE)
 magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=10, tcl=0.3, ratio=0.5,labels=FALSE)
+
 
 ###################################################################
-######################### Mr vs Rproy #############################
+######################### Mr vs dij ################################
 ###################################################################
-
-plot(R_fi,rp_fi,ylim=c(40,125),xlim=limxmag,xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
-col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
-
-func_plot(R_fi,rp_fi,"orange")
-#----------
-func_plot(R_gg,rp_gg,'magenta')
-#----------
-func_plot(R_no,rp_no,'red')
-#----------
-func_plot(R_cp,rp_cp,'darkblue')
-#----------
-func_plot(R_vs,rp_vs,'darkgreen')
-#----------
-func_plot(R_vr,rp_vr,'Deepskyblue3')
+xx_no<-S$dij*1000.   
+xx_gg<-SS$dij*1000.  
+xx_fi<-FF$dij*1000.  
+xx_cp<-Gf$dij*1000.  
+xx_vv<-VG$dij*1000.  
+xx_vr=subset(VG$dij*1000.,VG$tipo==0)
+xx_vs=subset(VG$dij*1000.,VG$tipo==1)
 
 
-text(-22.5,45,label='B',cex=1.2)
+plot(R_fi,xx_fi,ylim=c(60,150),xlim=limxmag,xlab='',ylab=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]'),
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n",log='y')#,yaxt='n')
+
+func_plot(R_fi,xx_fi,"orange")
+#----------
+func_plot(R_gg,xx_gg,'magenta')
+#----------
+func_plot(R_no,xx_no,'red')
+#----------
+func_plot(R_cp,xx_cp,'darkblue')
+#----------
+func_plot(R_vs,xx_vs,'darkgreen')
+#----------
+func_plot(R_vr,xx_vr,'Deepskyblue3')
+
+text(-20.4,65,label='B',cex=1.2)
+
+#legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-
 
 ###################################################################
 ######################### Mr vs tcr ###############################
 ###################################################################
 #labx=TeX('$M_{bri}$')
-plot(R_fi,tcr_fi,ylim=c(0.01,0.11),xlim=limxmag,xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
+plot(R_fi,tcr_fi,ylim=c(0.02,0.11),xlim=limxmag,xlab='',ylab=TeX('$H_0 \\, t_{cr}$ '),
 col="orange",main='',lwd=2,asp=-5,type="n",log='y')#,xaxt='n',yaxt='n')
 
 func_plot(R_fi,tcr_fi,"orange")
@@ -241,11 +251,12 @@ func_plot(R_vs,tcr_vs,'darkgreen')
 func_plot(R_vr,tcr_vr,'Deepskyblue3')
 
 
-text(-22.5,0.015,label='C',cex=1.2)
+text(-20.4,0.025,label='C',cex=1.2)
 mtext(TeX('$M_{bri}-5log_{10}(h)$'), side = 1, cex = 0.8, line = 2.2, col = "black")
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+#magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 
@@ -280,44 +291,37 @@ func_plot(R_vr,xx_vr,'Deepskyblue3')
 legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(2,majorn=5, minorn=10, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
-magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+magaxis(4,majorn=5, minorn=10, tcl=0.3, ratio=0.5,labels=FALSE)
+
 
 ###################################################################
-######################### Mr vs dij ################################
+######################### Mr vs Rproy #############################
 ###################################################################
-xx_no<-S$dij   
-xx_gg<-SS$dij  
-xx_fi<-FF$dij  
-xx_cp<-Gf$dij  
-xx_vv<-VG$dij  
-xx_vr=subset(VG$dij,VG$tipo==0)
-xx_vs=subset(VG$dij,VG$tipo==1)
+
+plot(R_fi,rp_fi,ylim=c(40,125),xlim=limxmag,xlab='',ylab=TeX('$r_p$ \\[kpc h$^{-1}$ \\]'),
+col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n")#,yaxt='n')
+
+func_plot(R_fi,rp_fi,"orange")
+#----------
+func_plot(R_gg,rp_gg,'magenta')
+#----------
+func_plot(R_no,rp_no,'red')
+#----------
+func_plot(R_cp,rp_cp,'darkblue')
+#----------
+func_plot(R_vs,rp_vs,'darkgreen')
+#----------
+func_plot(R_vr,rp_vr,'Deepskyblue3')
 
 
-plot(R_fi,xx_fi,ylim=c(0.06,0.15),xlim=limxmag,xlab='',ylab=TeX('$d_{ij}$ \\[kpc h$^{-1}$ \\]'),
-col="orange",main='',lwd=2,asp=-5,xaxt='n',type="n",log='y')#,yaxt='n')
-
-func_plot(R_fi,xx_fi,"orange")
-#----------
-func_plot(R_gg,xx_gg,'magenta')
-#----------
-func_plot(R_no,xx_no,'red')
-#----------
-func_plot(R_cp,xx_cp,'darkblue')
-#----------
-func_plot(R_vs,xx_vs,'darkgreen')
-#----------
-func_plot(R_vr,xx_vr,'Deepskyblue3')
-
-
-legend(-20.,134,c("Node", "Filaments",'Groups','Field','Voids'),bty="n",lty=c(1,1,1,1,1), col=c('red',"orange","magenta",'darkblue','black'),horiz=FALSE,inset=0,cex=0.5,pch=c(16,18,17,20,21))
 
 magaxis(1,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(2,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(3,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
 magaxis(4,majorn=5, minorn=5, tcl=0.3, ratio=0.5,labels=FALSE)
+
 
 ###################################################################
 ######################### Mr vs tita ################################

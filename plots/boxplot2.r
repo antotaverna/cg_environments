@@ -358,8 +358,7 @@ h=b+1 ; b=b+Nmi_ved[i+1]
 
 (ask=TRUE)
 #cairo_pdf("boxplot2.pdf")
-par(family="serif")
-par(family="serif")
+#par(family="serif")
 par(cex.lab=1.9)       #Tamaño labels
 par(cex.axis=1.2)      #Tamaño números en ejes.
 par(lwd=1)
@@ -368,7 +367,7 @@ par(mgp=c(4,0.4,0))  #margen labels
 par(mar=c(0,0,0,0))
 par(mfrow = c(4,2))   # dibujo 4x2
 
-par(mar = c(0, 2, 0, 3.5), oma = c(4, 3, 3, 0)) #pegame este boxplot
+par(mar = c(0, 2.5, 0, 3.5), oma = c(4, 3, 3, 0)) #pegame este boxplot
 
 #par(mgp=c(1.8,0.4,0))      	        #margen labels
 
@@ -395,10 +394,12 @@ boxplot(x, z, y, w, vs, vr,
 	outline = FALSE,
     whiskers = FALSE,
     ylim = c(100,500),
+    #cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",#yaxt="n",
     log='y',
     col= colores)
+
 laby=TeX('$\\sigma_v$ \\[km s$^{-1}$\\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 rango =c(2, 2.3, 2.6, 2.8)
@@ -447,9 +448,9 @@ boxplot(x,z,y,w,vs,vr,
     ylim = c(23.7,26.3),
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
-        col= colores)
+    col= colores)
 
-mtext(TeX('$\\mu$\\[mag  $arcsec^{-2}\\]$'), side = 2, cex = 1, line = 3.2, col = "black")
+mtext(TeX('$\\mu$\\[mag  $arcsec^{-2}\\]$'), side = 2, line = 3.2, col = "black")
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 # ------------------------------------------------------
@@ -546,6 +547,7 @@ boxplot(x,z,y,w,vs,vr,
     ylim = c(50,150),
     whisklty = 0, staplelty=0,
 #	lwd=c(1.2,1.2,1.5),
+    #cex.axis=1.2,
     log = "y",
 	xaxt="n", #yaxt="n",
     col= colores)
@@ -621,8 +623,8 @@ boxplot(x,z,y,w,vs,vr,
 	notch = TRUE,
 	varwidth = TRUE,
 	outline = FALSE,	whisklty = 0, staplelty=0,
-        ylim = c(0.1,1.6),
-	cex.axis=1.2,
+    ylim = c(0.1,1.6),
+	#cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
@@ -643,7 +645,7 @@ boxplot(nodo_fp_gr,fil_fp_gr,Fof_fp_gr,cam_fp_gr,vs_fp_gr,vr_fp_gr,
 	varwidth = TRUE,	whisklty = 0, staplelty=0,
 	outline = FALSE,
     ylim = c(0.32,1.1),
-	cex.axis=1.2,
+	#cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
@@ -664,7 +666,7 @@ boxplot(nodo_fe_gr,fil_fe_gr,Fof_fe_gr,cam_fe_gr,vs_fe_gr,vr_fe_gr,
 	varwidth = TRUE,	whisklty = 0, staplelty=0,
 	outline = FALSE,
     ylim = c(0.32,1.1),
-	cex.axis=1.2,
+	#cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),

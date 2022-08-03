@@ -396,7 +396,7 @@ boxplot(x, z, y, w, vs, vr,
     ylim = c(100,500),
     #cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
-	xaxt="n",#yaxt="n",
+	xaxt="n", yaxt="n",
     log='y',
     col= colores)
 
@@ -407,7 +407,7 @@ rango =c(2, 2.3, 2.6, 2.8)
 
 
 
-magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=FALSE,las=2,at = rango)
+magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)#,at = rango)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 # ------------------------------------------------------
 # -----------Redshifth----------------------------------
@@ -549,16 +549,16 @@ boxplot(x,z,y,w,vs,vr,
 #	lwd=c(1.2,1.2,1.5),
     #cex.axis=1.2,
     log = "y",
-	xaxt="n", #yaxt="n",
+	xaxt="n", yaxt="n",
     col= colores)
 
 laby=TeX('$<d_{ij}>$ \\[kpc h$^{-1}$ \\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 
-#rango =c(1.69, 1.9, 2., 2.17)
+rango =c(50,60, 100)
 #mtext(c(TeX('$50$'),TeX('$80$'),TeX('$100 $'),TeX('$ 150 $')),at=rango, side =2, cex = 1, line = 1.2, col = "black")
 
-magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=FALSE,las=2, at = rango)
+magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2, logpretty=TRUE) #, at = rango)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 # ------------------------------------------------------
 # -----------tcr----------------------------------
@@ -579,7 +579,7 @@ boxplot(x,z,y,w,vs,vr,
 	outline = FALSE,	whisklty = 0, staplelty=0,
     ylim = c(0.009,0.12),
 #	lwd=c(1.2,1.2,1.5),
-	xaxt="n",#yaxt="n",
+	xaxt="n", yaxt="n",
     log='y',
     col= colores)
 
@@ -589,7 +589,7 @@ mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 #rango =c(-2, -1.69, -1.39, -1.15)
 #mtext(c(TeX('$0.01$'),TeX('$0.02$'),TeX('$0.04 $'),TeX('$ 0.07 $')),at=rango, side =2, cex = 1, line = 1.2, col = "black")
 
-magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=FALSE,las=2,at = rango)
+magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2,at = rango)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 # ------------------------------------------------------
 # ----------- M2 - M1 ----------------------------------
@@ -631,7 +631,7 @@ boxplot(x,z,y,w,vs,vr,
 	#names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
         col= colores)
 
-laby=TeX('$M_2 -M_1$ ')
+laby=TeX('$M_2$ - $M_1$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
@@ -654,7 +654,8 @@ boxplot(nodo_fp_gr,fil_fp_gr,Fof_fp_gr,cam_fp_gr,vs_fp_gr,vr_fp_gr,
 
 laby=TeX('$F_{red}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")
-mtext(c(TeX('$CG_N$'),TeX('$CG_F$'),TeX('$CG_{LG}$'),TeX('$ CG_{NE} $'),TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),at=c(1,2,3,4,5,6), side =1, cex = 1, line = 1.2, col = "black")
+mtext(c(TeX('$CG_N$'),TeX('$CG_F$'),TeX('$CG_{LG}$'),TeX('$ CG_{NE} $'),TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),
+    at=c(1,2,3,4,5,6), side =1, cex = 0.9, line = 1.2, col = "black")
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
 # ------------------------------------------------------
@@ -675,7 +676,8 @@ boxplot(nodo_fe_gr,fil_fe_gr,Fof_fe_gr,cam_fe_gr,vs_fe_gr,vr_fe_gr,
 
 laby=TeX('$F_{early}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")
-mtext(c(TeX('$CG_N$'),TeX('$CG_F$'),TeX('$CG_{LG}$'),TeX('$ CG_{NE} $'),TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),at=c(1,2,3,4,5,6), side =1, cex = 1, line = 1.2, col = "black")
+mtext(c(TeX('$CG_N$'),TeX('$CG_F$'),TeX('$CG_{LG}$'),TeX('$ CG_{NE} $'), TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),
+    at=c(1,2,3,4,5,6), side =1, cex = 0.9, line = 1.2, col = "black")
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
 

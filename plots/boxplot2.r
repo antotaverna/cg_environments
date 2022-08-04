@@ -374,6 +374,18 @@ par(mar = c(0, 2.5, 0, 3.5), oma = c(4, 3, 3, 0)) #pegame este boxplot
 colores=c("red",'darkorange','magenta','blue','darkgreen','deepskyblue3')
 
 
+#--------- prueba color
+a=c("red",'darkorange','magenta','blue3','green3','deepskyblue')
+a1 <- col2rgb(a)
+# transform to HSV space
+a2 <- rgb2hsv(a1)
+# you can try different scaling values e.g. between 0.3 - 0.6
+n <- 0.4
+col_pru=hsv(a2[1,], a2[2,]*n, a2[3,])
+
+#---------------------
+
+
 # ------------------------------------------------------
 # -----------Sigv----------------------------------
 # ------------------------------------------------------
@@ -398,7 +410,8 @@ boxplot(x, z, y, w, vs, vr,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n", yaxt="n",
     log='y',
-    col= colores)
+    col= col_pru)
+    #col= colores)
 
 laby=TeX('$\\sigma_v$ \\[km s$^{-1}$\\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")

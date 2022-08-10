@@ -443,29 +443,42 @@ magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 #mtext(expression(paste(Redshift)), side = 2, cex = 1, line = 3.2, col = "black")
 
 # ------------------------------------------------------
-# -----------mu----------------------------------
+# -----------dij----------------------------------
 # ------------------------------------------------------
-x <-  S$mu  #nodos
-y <- SS$mu #grupos FoF
-z <- FF$mu #filamentos
-w <- Gf$mu #campo
-v <- VG$mu #campo
-vr <- subset(VG$mu,VG$tipo==0) #voids
-vs <- subset(VG$mu,VG$tipo==1) #voids
+x <- S$dij*1000.  #nodos
+y <- SS$dij*1000. #grupos FoF
+z <- FF$dij*1000. #filamentos
+w <- Gf$dij*1000. #campo
+v <- VG$dij*1000. #voids
+vr <- subset(VG$dij*1000.,VG$tipo==0) #voids
+vs <- subset(VG$dij*1000.,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vs,vr,	
+#boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),	
+boxplot(x,z,y,w,vs,vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
-	outline = FALSE,	whisklty = 0, staplelty=0,
-    ylim = c(23.7,26.3),
+	outline = FALSE,
+    ylim = c(47,150),
+    whisklty = 0, staplelty=0,
 #	lwd=c(1.2,1.2,1.5),
-	xaxt="n",yaxt="n",
+    #cex.axis=1.2,
+    log = "y",
+	xaxt="n", yaxt="n",
     col= colores)
 
-mtext(TeX('$\\mu$\\[mag  $arcsec^{-2}\\]$'), side = 2, line = 3.2, col = "black")
-magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
+laby=TeX('$<d_{ij}>$ \\[kpc h$^{-1}$ \\]')
+mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
+
+rango =c( 100)
+
+#mtext(c(TeX('$50$'),TeX('$80$'),TeX('$100 $'),TeX('$ 150 $')),at=rango, side =2, cex = 1, line = 1.2, col = "black")
+
+#magaxis(side=2, las=2,at = rango)
+magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2, logpretty=TRUE) #, at = rango)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
+
+
 # ------------------------------------------------------
 # -----------mabs1----------------------------------
 # ------------------------------------------------------
@@ -488,7 +501,7 @@ boxplot(x,z,y,w,vs,vr,
     col= colores)
 laby=TeX('$M_{bri} $')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
-magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
+magaxis(side=2, majorn=4, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 # ------------------------------------------------------
 # -----------titaG----------------------------------
@@ -541,69 +554,30 @@ magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 
 
 # ------------------------------------------------------
-# -----------dij----------------------------------
+# -----------mu----------------------------------
 # ------------------------------------------------------
-x <- S$dij*1000.  #nodos
-y <- SS$dij*1000. #grupos FoF
-z <- FF$dij*1000. #filamentos
-w <- Gf$dij*1000. #campo
-v <- VG$dij*1000. #voids
-vr <- subset(VG$dij*1000.,VG$tipo==0) #voids
-vs <- subset(VG$dij*1000.,VG$tipo==1) #voids
+x <-  S$mu  #nodos
+y <- SS$mu #grupos FoF
+z <- FF$mu #filamentos
+w <- Gf$mu #campo
+v <- VG$mu #campo
+vr <- subset(VG$mu,VG$tipo==0) #voids
+vs <- subset(VG$mu,VG$tipo==1) #voids
 
-#boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),	
-boxplot(x,z,y,w,vs,vr,
-	las = 1,
-	notch = TRUE,
-	varwidth = TRUE,
-	outline = FALSE,
-    ylim = c(50,150),
-    whisklty = 0, staplelty=0,
-#	lwd=c(1.2,1.2,1.5),
-    #cex.axis=1.2,
-    log = "y",
-	xaxt="n", yaxt="n",
-    col= colores)
-
-laby=TeX('$<d_{ij}>$ \\[kpc h$^{-1}$ \\]')
-mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
-
-rango =c(50,60, 100)
-#mtext(c(TeX('$50$'),TeX('$80$'),TeX('$100 $'),TeX('$ 150 $')),at=rango, side =2, cex = 1, line = 1.2, col = "black")
-
-magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2, logpretty=TRUE) #, at = rango)
-magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
-# ------------------------------------------------------
-# -----------tcr----------------------------------
-# ------------------------------------------------------
-x <- S$tcr  #nodos
-y <- SS$tcr #grupos FoF
-z <- FF$tcr #filamentos
-w <- Gf$tcr #campo
-v <- VG$tcr #voids
-vr <- subset(VG$tcr,VG$tipo==0) #voids
-vs <- subset(VG$tcr,VG$tipo==1) #voids
-
-#boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),	
-boxplot(x,z,y,w,vs,vr,
+boxplot(x,z,y,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
 	outline = FALSE,	whisklty = 0, staplelty=0,
-    ylim = c(0.009,0.12),
+    ylim = c(23.7,26.3),
 #	lwd=c(1.2,1.2,1.5),
-	xaxt="n", yaxt="n",
-    log='y',
+	xaxt="n",yaxt="n",
     col= colores)
 
-laby=TeX('$H_0 \\, t_{cr}$ ')
-mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
-
-#rango =c(-2, -1.69, -1.39, -1.15)
-#mtext(c(TeX('$0.01$'),TeX('$0.02$'),TeX('$0.04 $'),TeX('$ 0.07 $')),at=rango, side =2, cex = 1, line = 1.2, col = "black")
-
-magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2,at = rango)
+mtext(TeX('$\\mu$\\[mag  $arcsec^{-2}\\]$'), side = 2, line = 3.2, col = "black")
+magaxis(side=2, majorn=3, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
+
 # ------------------------------------------------------
 # ----------- M2 - M1 ----------------------------------
 # ------------------------------------------------------
@@ -636,7 +610,7 @@ boxplot(x,z,y,w,vs,vr,
 	notch = TRUE,
 	varwidth = TRUE,
 	outline = FALSE,	whisklty = 0, staplelty=0,
-    ylim = c(0.1,1.6),
+    ylim = c(0.1,1.7),
 	#cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
@@ -647,6 +621,38 @@ boxplot(x,z,y,w,vs,vr,
 laby=TeX('$M_2$ - $M_1$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
+magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
+
+# ------------------------------------------------------
+# -----------tcr----------------------------------
+# ------------------------------------------------------
+x <- S$tcr  #nodos
+y <- SS$tcr #grupos FoF
+z <- FF$tcr #filamentos
+w <- Gf$tcr #campo
+v <- VG$tcr #voids
+vr <- subset(VG$tcr,VG$tipo==0) #voids
+vs <- subset(VG$tcr,VG$tipo==1) #voids
+
+#boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),	
+boxplot(x,z,y,w,vs,vr,
+	las = 1,
+	notch = TRUE,
+	varwidth = TRUE,
+	outline = FALSE,	whisklty = 0, staplelty=0,
+    ylim = c(0.009,0.12),
+#	lwd=c(1.2,1.2,1.5),
+	xaxt="n", yaxt="n",
+    log='y',
+    col= colores)
+
+laby=TeX('$H_0 \\, t_{cr}$ ')
+mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
+
+#rango =c(-2, -1.69, -1.39, -1.15)
+#mtext(c(TeX('$0.01$'),TeX('$0.02$'),TeX('$0.04 $'),TeX('$ 0.07 $')),at=rango, side =2, cex = 1, line = 1.2, col = "black")
+
+magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2,at = rango)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 
 # ------------------------------------------------------

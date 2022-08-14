@@ -459,8 +459,8 @@ boxplot(x,z,y,w,vs,vr,
 	varwidth = TRUE,
 	outline = FALSE,	whisklty = 0, staplelty=0,
     ylim = c(23.7,26.3),
-#	lwd=c(1.2,1.2,1.5),
-	xaxt="n",yaxt="n",
+	#lwd=c(1.2,1.2,1.5),
+	xaxt="n",#yaxt="n",
     col= colores)
 
 mtext(TeX('$\\mu$\\[mag  $arcsec^{-2}\\]$'), side = 2, line = 3.2, col = "black")

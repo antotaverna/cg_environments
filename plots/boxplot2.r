@@ -458,6 +458,7 @@ boxplot(x,z,y,w,vs,vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
+<<<<<<< HEAD
 	outline = FALSE,
     ylim = c(47,150),
     whisklty = 0, staplelty=0,
@@ -465,6 +466,12 @@ boxplot(x,z,y,w,vs,vr,
     #cex.axis=1.2,
     log = "y",
 	xaxt="n", yaxt="n",
+=======
+	outline = FALSE,	whisklty = 0, staplelty=0,
+    ylim = c(23.7,26.3),
+	#lwd=c(1.2,1.2,1.5),
+	xaxt="n",#yaxt="n",
+>>>>>>> 486f2c6241ac2abd48c39ffb29d299bf27842319
     col= colores)
 
 laby=TeX('$<d_{ij}>$ \\[kpc h$^{-1}$ \\]')

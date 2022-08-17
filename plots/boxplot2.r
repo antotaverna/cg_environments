@@ -20,7 +20,7 @@ colnames(FF)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)] <- c("igru",'nmi','alcm','d
 
 colnames(VG)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17)] <- c("igru",'nmi','alcm','delcm','zmedian','radio_mins','mu','sigv','rmag_bri','flag','rabs1','dij','tcr','rp','rabs2','tipo','estado')
 
-colnames(HH)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)] <-c("GId", "Nm", "RA", "Dec", "Redshift", "mag_r", "mag_g", "mag_g", "galid", "r50", "r90", "rabs", "gabs", "uabd", "passive", "early")
+colnames(HH)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)] <-c("GId", "Nm", "RA", "Dec", "Redshift", "mag_r", "mag_g", "mag_u", "galid", "r50", "r90", "rabs", "gabs", "uabd", "passive", "early")
 
 
 #------------------------------------------------------------------

@@ -375,7 +375,7 @@ colores=c("red",'darkorange','magenta','blue','darkgreen','deepskyblue3')
 
 
 #--------- prueba color
-a=c("red",'darkorange','magenta','blue3','green3','deepskyblue')
+a=c("red2",'orange2','magenta3','blue3','green4','deepskyblue3')
 a1 <- col2rgb(a)
 # transform to HSV space
 a2 <- rgb2hsv(a1)
@@ -458,7 +458,6 @@ boxplot(x,z,y,w,vs,vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
-<<<<<<< HEAD
 	outline = FALSE,
     ylim = c(47,150),
     whisklty = 0, staplelty=0,
@@ -466,13 +465,7 @@ boxplot(x,z,y,w,vs,vr,
     #cex.axis=1.2,
     log = "y",
 	xaxt="n", yaxt="n",
-=======
-	outline = FALSE,	whisklty = 0, staplelty=0,
-    ylim = c(23.7,26.3),
-	#lwd=c(1.2,1.2,1.5),
-	xaxt="n",#yaxt="n",
->>>>>>> 486f2c6241ac2abd48c39ffb29d299bf27842319
-    col= colores)
+    col= col_pru)
 
 laby=TeX('$<d_{ij}>$ \\[kpc h$^{-1}$ \\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -505,7 +498,7 @@ boxplot(x,z,y,w,vs,vr,
     ylim = c(-22.6,-20.6),
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
-    col= colores)
+    col= col_pru)
 laby=TeX('$M_{bri} $')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 magaxis(side=2, majorn=4, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
@@ -579,7 +572,7 @@ boxplot(x,z,y,w,vs,vr,
     ylim = c(23.7,26.3),
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
-    col= colores)
+    col= col_pru)
 
 mtext(TeX('$\\mu$\\[mag  $arcsec^{-2}\\]$'), side = 2, line = 3.2, col = "black")
 magaxis(side=2, majorn=3, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
@@ -623,7 +616,7 @@ boxplot(x,z,y,w,vs,vr,
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
 	#names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
-        col= colores)
+        col= col_pru)
 
 laby=TeX('$M_2$ - $M_1$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -651,7 +644,7 @@ boxplot(x,z,y,w,vs,vr,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n", yaxt="n",
     log='y',
-    col= colores)
+    col= col_pru)
 
 laby=TeX('$H_0 \\, t_{cr}$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -676,7 +669,7 @@ boxplot(nodo_fp_gr,fil_fp_gr,Fof_fp_gr,cam_fp_gr,vs_fp_gr,vr_fp_gr,
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
 	names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$SV$'),TeX('$RV$')),
-    col= colores)
+    col= col_pru)
 
 laby=TeX('$F_{red}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")
@@ -698,7 +691,7 @@ boxplot(nodo_fe_gr,fil_fe_gr,Fof_fe_gr,cam_fe_gr,vs_fe_gr,vr_fe_gr,
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
 	#names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
-        col= colores)
+        col= col_pru)
 
 laby=TeX('$F_{early}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")

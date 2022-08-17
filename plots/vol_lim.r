@@ -58,12 +58,18 @@ par(mar=c(5,5,1,1))  #c(b,l,t,r)
 #par(oma=c(0,0,0,0))  #c(b,l,t,r)
 
 plot(zgal,Mgal,ylim=c(-17,-23.2),xlim=c(0,0.19),pch='.',cex=0.5,col='gray',
-     xlab='Redshift',ylab=TeX('$M_{bri} - 5log_{10}(h)$'),cex.lab=1.8, cex.axis=1.5)
-points(z_no,R_no,pch=16,cex=0.6,col='red')
-points(z_fi,R_fi,pch=5,cex=0.6,col='darkorange')
-points(z_gg,R_gg,pch=0,cex=0.6,col='magenta')
-points(z_cp,R_cp,pch=4,cex=0.6,col='blue')
-points(z_vv,R_vv,pch=11,cex=0.6,col='black')
+     xlab='Redshift',ylab=TeX('$M_r - 5 $ $log(h)$'),cex.lab=1.8, cex.axis=1.5)
+points(z_no,R_no,pch=4,cex=0.6,col='black')
+points(z_fi,R_fi,pch=4,cex=0.6,col='black')
+points(z_gg,R_gg,pch=4,cex=0.6,col='black')
+points(z_cp,R_cp,pch=4,cex=0.6,col='black')
+points(z_vv,R_vv,pch=4,cex=0.6,col='black')
+# symbols
+#points(z_no,R_no,pch=16,cex=0.6,col='red')
+#points(z_fi,R_fi,pch=5,cex=0.6,col='darkorange')
+#points(z_gg,R_gg,pch=0,cex=0.6,col='magenta')
+#points(z_cp,R_cp,pch=4,cex=0.6,col='blue')
+#points(z_vv,R_vv,pch=11,cex=0.6,col='black')
 magaxis(label=FALSE)
 
 abline(v=0.01,lty=2)
@@ -89,10 +95,13 @@ points(med_zz,med_mm, type="l",pch='.')
 lines(med_zz,med_mm, type="l", col="black", lty=1)
 lines(med_zz,med_mm-3, type="l", col="black", lty=1)
 
-#text(0.15,-19.0, TeX('$M_{bri}$ in:'), cex=1.3)
-legend(0.13,-18.9, legend=c(TeX('All galaxies'), TeX('$M_{bri}$ in $CG_{N}$'),TeX('$M_{bri}$ in $CG_{F}$'),
-     TeX('$M_{bri}$ in $CG_{LG}$'),TeX('$M_{bri}$ in $CG_{NE}$'), TeX('$M_{bri}$ in $CG_{V}$')),
-     col=c('gray', 'red',"darkorange",'magenta',"blue","black"), pch=c(20,16,5,0,4,11), cex=1.2,border = NULL,bty='n')
+#text(0.15,-19.2, TeX('$M_{bri}$ in:'), cex=1.3)
+#legend(0.13,-19.2, legend=c(TeX('All galaxies'), TeX('$M_{bri}$ in $CG_{N}$'),TeX('$M_{bri}$ in $CG_{F}$'),
+#     TeX('$M_{bri}$ in $CG_{LG}$'),TeX('$M_{bri}$ in $CG_{NE}$'), TeX('$M_{bri}$ in $CG_{V}$')),
+#     col=c('gray', 'red',"darkorange",'magenta',"blue","black"), pch=c(20,16,5,0,4,11), cex=1.4,border = NULL,bty='n')
+
+legend(0.13,-18.2, legend=c(TeX('All galaxies'), TeX('$M_{bri}$ in $CG$')),
+     col=c('gray', "black"), pch=c(20,4), cex=1.4,border = NULL,bty='n')
 
 #dev.off()
 

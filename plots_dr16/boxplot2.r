@@ -2,7 +2,7 @@ library(bootstrap); library(latex2exp); library(astrolibR)
  library(magicaxis)
 #--------------------------------------------------------------
 
-HH<-read.table("../../structures/enviros_dr16/glx_CGs.dat") #flux limited
+HH<-read.table("../../structures/enviros_dr16/glx_CGs_red_early.dat") #flux limited
 
 
 SS<-read.table("../data_dr16/compact_in_loose_v1.dat")
@@ -25,7 +25,7 @@ colnames(FF)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17)] <- c("igru",'alcm','d
 colnames(VG)[c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18)] <- c("igru",'alcm','delcm','zmedian','nmi','radio_mins','mu','rmag_bri','sigv','rp','mvir','rabs1','rbas2','lgroup','tcr','dij','flag','tipo')
 
 
-colnames(HH)[c(1,2,3,4,5,6,7,8,9)] <-c("galid", "RA", "Dec", "mag_r", "Redshift", "rabs","color","cindex", "GId")#, "passive", "early")
+colnames(HH)[c(1,2,3,4,5,6,7,8,9)] <-c("galid", "RA", "Dec", "mag_r", "Redshift", "rabs","color","cindex", "GId", "passive", "early")
 
 
 #------------------------------------------------------------------

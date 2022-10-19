@@ -63,13 +63,24 @@ colores=c("red",'darkorange','magenta','blue','darkgreen','deepskyblue3')
 
 #--------- prueba color
 a=c("red2",'orange2','magenta3','blue3','green4','deepskyblue3')
+a=c("#F8766D","#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")
 a1 <- col2rgb(a)
+
+#alpha=0.5
+#cn =rgb(a1[1,1],a1[2,1],a1[3,1], alpha=alpha, maxColorValue = 255)
+#clg=rgb(a1[1,2],a1[2,2],a1[3,2], alpha=alpha, maxColorValue = 255)
+#cf =rgb(a1[1,3],a1[2,3],a1[3,3], alpha=alpha, maxColorValue = 255)
+#cne=rgb(a1[1,4],a1[2,4],a1[3,4], alpha=alpha, maxColorValue = 255)
+#cvs=rgb(a1[1,5],a1[2,5],a1[3,5], alpha=alpha, maxColorValue = 255)
+#cvr=rgb(a1[1,6],a1[2,6],a1[3,6], alpha=alpha, maxColorValue = 255)
+
+#col_pru=c(cn,clg,cf,cne,cvs,cvr)
+
 # transform to HSV space
 a2 <- rgb2hsv(a1)
 # you can try different scaling values e.g. between 0.3 - 0.6
-n <- 0.4
+n <- 0.45
 col_pru=hsv(a2[1,], a2[2,]*n, a2[3,])
-
 #---------------------
 
 
@@ -85,7 +96,7 @@ vr <- subset(VG$sigv,VG$tipo==0) #voids
 vs <- subset(VG$sigv,VG$tipo==1) #voids
 
 #boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),
-boxplot(x, z, y, w, vs, vr,
+boxplot(x, y, z, w, vs, vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -122,7 +133,7 @@ vr <- subset(VG$dij*1000.,VG$tipo==0) #voids
 vs <- subset(VG$dij*1000.,VG$tipo==1) #voids
 
 #boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),	
-boxplot(x,z,y,w,vs,vr,
+boxplot(x,y,z,w,vs,vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -159,7 +170,7 @@ v <- VG$rabs1 #campo
 vr <- subset(VG$rabs1,VG$tipo==0) #voids
 vs <- subset(VG$rabs1,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vs,vr,	
+boxplot(x,y,z,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -185,7 +196,7 @@ v <- VG$mu #campo
 vr <- subset(VG$mu,VG$tipo==0) #voids
 vs <- subset(VG$mu,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vs,vr,	
+boxplot(x,y,z,w,vs,vr,	
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -211,7 +222,7 @@ v <- VG$rabs2 - VG$rabs1  #campo
 vr <- subset(VG$rabs2-VG$rabs1,VG$tipo==0) #voids
 vs <- subset(VG$rabs2-VG$rabs1,VG$tipo==1) #voids
 
-boxplot(x,z,y,w,vs,vr,
+boxplot(x,y,z,w,vs,vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -240,8 +251,8 @@ v <- VG$tcr #voids
 vr <- subset(VG$tcr,VG$tipo==0) #voids
 vs <- subset(VG$tcr,VG$tipo==1) #voids
 
-#boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),	
-boxplot(x,z,y,w,vs,vr,
+#boxplot(log10(x),log10(y),log10(z),log10(w),log10(vs),log10(vr),	
+boxplot(x,y,z,w,vs,vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -271,12 +282,12 @@ w <- Gf$fr_red #campo
 v <- VG$fr_red #voids
 vr <- subset(VG$fr_red,VG$tipo==0) #voids
 vs <- subset(VG$fr_red,VG$tipo==1) #voids
-boxplot(x,z,y,w,vs,vr,
+boxplot(x,y,z,w,vs,vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,	whisklty = 0, staplelty=0,
 	outline = FALSE,
-    ylim = c(0.32,1.1),
+    ylim = c(0.2,1.1),
 	#cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
@@ -286,7 +297,7 @@ boxplot(x,z,y,w,vs,vr,
 
 laby=TeX('$F_{red}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")
-mtext(c(TeX('$CG_N$'),TeX('$CG_F$'),TeX('$CG_{LG}$'),TeX('$ CG_{NE} $'),TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),
+mtext(c(TeX('$CG_N$'),TeX('$CG_{LG}$'),TeX('$CG_{F}$'),TeX('$ CG_{NE} $'),TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),
     at=c(1,2,3,4,5,6), side =1, cex = 0.9, line = 1.2, col = "black")
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
@@ -302,12 +313,12 @@ w <- Gf$fr_early #campo
 v <- VG$fr_early #voids
 vr <- subset(VG$fr_early,VG$tipo==0) #voids
 vs <- subset(VG$fr_early,VG$tipo==1) #voids
-boxplot(x,z,y,w,vs,vr,
+boxplot(x,y,z,w,vs,vr,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,	whisklty = 0, staplelty=0,
 	outline = FALSE,
-    ylim = c(0.32,1.1),
+    ylim = c(0.2,1.1),
 	#cex.axis=1.2,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
@@ -317,7 +328,7 @@ boxplot(x,z,y,w,vs,vr,
 
 laby=TeX('$F_{early}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")
-mtext(c(TeX('$CG_N$'),TeX('$CG_F$'),TeX('$CG_{LG}$'),TeX('$ CG_{NE} $'), TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),
+mtext(c(TeX('$CG_N$'),TeX('$CG_{LG}$'),TeX('$CG_{F}$'),TeX('$ CG_{NE} $'), TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),
     at=c(1,2,3,4,5,6), side =1, cex = 0.9, line = 1.2, col = "black")
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)

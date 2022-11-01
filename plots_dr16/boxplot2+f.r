@@ -39,12 +39,12 @@ N_nodo=length(S$igru)
 N_Fof=length(SS$igru)
 N_fi=length(FF$igru)
 N_cam=length(Gf$igru)
-N_vv=length(VG$igru)
 N_vr=length(VR$igru)
 N_vs=length(VS$igru)
+N_vv=N_vr+N_vs
 
 
-#cairo_pdf("figuras/boxplot2.pdf")
+#cairo_pdf("figuras/boxplot2+f.pdf")
 #par(family="serif")
 par(cex.lab=1.9)       #Tamaño labels
 par(cex.axis=1.2)      #Tamaño números en ejes.
@@ -91,7 +91,7 @@ x <- S$sigv #nodos
 y <- SS$sigv #grupos FoF
 z <- FF$sigv #filamentos
 w <- Gf$sigv #campo
-v <- VG$sigv #voids
+#v <- VG$sigv #voids
 vr <- VR$sigv #voids
 vs <- VS$sigv #voids
 
@@ -128,7 +128,7 @@ x <- S$dij  #nodos
 y <- SS$dij #grupos FoF
 z <- FF$dij #filamentos
 w <- Gf$dij #campo
-v <- VG$dij #voids
+#v <- VG$dij #voids
 vr <- VR$dij #voids
 vs <- VS$dij #voids
 
@@ -165,7 +165,7 @@ x <- S$rabs1  #nodos
 y <- SS$rabs1 #grupos FoF
 z <- FF$rabs1 #filamentos
 w <- Gf$rabs1 #campo
-v <- VG$rabs1 #campo
+#v <- VG$rabs1 #campo
 vr <- VR$rabs1
 vs <- VS$rabs1 #voids
 
@@ -191,7 +191,7 @@ x <-  S$mu  #nodos
 y <- SS$mu #grupos FoF
 z <- FF$mu #filamentos
 w <- Gf$mu #campo
-v <- VG$mu #campo
+#v <- VG$mu #campo
 vr <- VR$mu
 vs <- VS$mu #voids
 
@@ -217,7 +217,7 @@ x <-  S$rabs2 -  S$rabs1  #nodos
 y <- SS$rabs2 - SS$rabs1  #grupos FoF
 z <- FF$rabs2 - FF$rabs1  #filamentos
 w <- Gf$rabs2 - Gf$rabs1  #campo
-v <- VG$rabs2 - VG$rabs1  #campo
+#v <- VG$rabs2 - VG$rabs1  #campo
 vr <- VR$rabs2 -  VR$rabs1
 vs <- VS$rabs2 -  VS$rabs1
 
@@ -246,7 +246,7 @@ x <- S$tcr  #nodos
 y <- SS$tcr #grupos FoF
 z <- FF$tcr #filamentos
 w <- Gf$tcr #campo
-v <- VG$tcr #voids
+#v <- VG$tcr #voids
 vr <- VR$tcr
 vs <- VS$tcr
 
@@ -278,7 +278,7 @@ x <- S$fr_red  #nodos
 y <- SS$fr_red #grupos FoF
 z <- FF$fr_red #filamentos
 w <- Gf$fr_red #campo
-v <- VG$fr_red #voids
+#v <- VG$fr_red #voids
 vr <- VR$fr_red
 vs <- VS$fr_red
 
@@ -310,7 +310,7 @@ x <- S$fr_early  #nodos
 y <- SS$fr_early #grupos FoF
 z <- FF$fr_early #filamentos
 w <- Gf$fr_early #campo
-v <- VG$fr_early #voids
+#v <- VG$fr_early #voids
 vr <- VR$fr_early
 vs <- VS$fr_early
 

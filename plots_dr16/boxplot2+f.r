@@ -82,8 +82,12 @@ a2 <- rgb2hsv(a1)
 n <- 0.45
 col_pru=hsv(a2[1,], a2[2,]*n, a2[3,])
 #---------------------
+col_err=col2rgb(colores, alpha = FALSE)/255
 
-
+col_e=vector()
+for(i in 1:6){
+col_e[i]=rgb(col_err[1,i],col_err[2,i],col_err[3,i],0.3)
+}
 # ------------------------------------------------------
 # -----------Sigv----------------------------------
 # ------------------------------------------------------
@@ -108,7 +112,7 @@ boxplot(x, y, z, w, vs, vr,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n", yaxt="n",
     log='y',
-    col= col_pru)
+    col= col_e)
     #col= colores)
 
 laby=TeX('$\\sigma_v$ \\[km s$^{-1}$\\]')
@@ -180,7 +184,7 @@ boxplot(x,y,z,w,vs,vr,
     col= col_pru)
 laby=TeX('$M_{bri} $')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
-magaxis(side=2, majorn=4, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
+magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 
 

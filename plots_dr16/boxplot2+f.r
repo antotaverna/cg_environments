@@ -63,7 +63,13 @@ colores=c("red",'magenta','darkorange','blue','darkgreen','deepskyblue3')
 
 #--------- prueba color
 a=c("red2",'orange2','magenta3','blue3','green4','deepskyblue3')
-a=c("#F8766D","#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")
+#rojo-gris
+a=c("#b2182b","#ef8a62","#fddbc7","#e0e0e0","#999999","#4d4d4d")
+#caca-verde
+#b=c("#8c510a","#d8b365", "#f6e8c3", "#c7eae5", "#5ab4ac", "#01665e")
+b=c("#8c510a","#d8b365","#f6e8c3","#01665e", "#5ab4ac", "#c7eae5")
+#calidos
+a=c("#d73027","#fc8d59", "#fee090", "#e0f3f8", "#91bfdb", "#4575b4")
 a1 <- col2rgb(a)
 
 #alpha=0.5
@@ -79,14 +85,20 @@ a1 <- col2rgb(a)
 # transform to HSV space
 a2 <- rgb2hsv(a1)
 # you can try different scaling values e.g. between 0.3 - 0.6
-n <- 0.45
+n <- 0.8
 col_pru=hsv(a2[1,], a2[2,]*n, a2[3,])
 #---------------------
-col_err=col2rgb(colores, alpha = FALSE)/255
-
+#col_err=col2rgb(colores, alpha = FALSE)/255
+col_err=col2rgb(a, alpha = FALSE)/255
 col_e=vector()
+
 for(i in 1:6){
-col_e[i]=rgb(col_err[1,i],col_err[2,i],col_err[3,i],0.4)
+col_e[i]=rgb(col_err[1,i],col_err[2,i],col_err[3,i],1.)
+}
+col_err=col2rgb(b, alpha = FALSE)/255
+col_e2=vector()
+for(i in 1:6){
+col_e[i]=rgb(col_err[1,i],col_err[2,i],col_err[3,i],1.)
 }
 # ------------------------------------------------------
 # -----------Sigv----------------------------------
@@ -181,7 +193,7 @@ boxplot(x,y,z,w,vs,vr,
     ylim = c(-22.6,-20.6),
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
-    col= col_pru)
+    col= col_e)
 laby=TeX('$M_{bri} $')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
@@ -207,7 +219,7 @@ boxplot(x,y,z,w,vs,vr,
     ylim = c(22.5,26.3),
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n",yaxt="n",
-    col= col_pru)
+    col= col_e)
 
 mtext(TeX('$\\mu$\\[mag  $arcsec^{-2}\\]$'), side = 2, line = 3.2, col = "black")
 magaxis(side=2, majorn=3, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
@@ -236,7 +248,7 @@ boxplot(x,y,z,w,vs,vr,
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V_S}$'),TeX('$CG_{V_R}$')),
 	#names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
-        col= col_pru)
+        col= col_e)
 
 laby=TeX('$M_2$ - $M_1$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -264,7 +276,7 @@ boxplot(x,y,z,w,vs,vr,
 #	lwd=c(1.2,1.2,1.5),
 	xaxt="n", yaxt="n",
     log='y',
-    col= col_pru)
+    col= col_e)
 
 laby=TeX('$H_0 \\, t_{cr}$ ')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")
@@ -297,7 +309,7 @@ boxplot(x,y,z,w,vs,vr,
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
 	names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$SV$'),TeX('$RV$')),
-    col= col_pru)
+    col= col_e)
 
 laby=TeX('$F_{red}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")
@@ -329,7 +341,7 @@ boxplot(x,y,z,w,vs,vr,
 	xaxt="n",yaxt="n",
 	#names=c(TeX('$CG_{N}$'),TeX('$CG_{F}$'),TeX('$CG_{L}$'),TeX('$CG_{C}$'),TeX('$CG_{V}$')),
 	#names=c(TeX('$N$'),TeX('$F$'),TeX('$L$'),TeX('$NE$'),TeX('$VS$'),TeX('$VR$')),
-        col= col_pru)
+        col= col_e)
 
 laby=TeX('$F_{early}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")

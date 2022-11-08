@@ -58,7 +58,7 @@ par(mar = c(0, 2.5, 0, 3.5), oma = c(4, 3, 3, 0)) #pegame este boxplot
 
 #par(mgp=c(1.8,0.4,0))      	        #margen labels
 
-colores=c("red",'darkorange','magenta','blue','darkgreen','deepskyblue3')
+colores=c("red",'magenta','darkorange','blue','darkgreen','deepskyblue3')
 
 
 #--------- prueba color
@@ -86,7 +86,7 @@ col_err=col2rgb(colores, alpha = FALSE)/255
 
 col_e=vector()
 for(i in 1:6){
-col_e[i]=rgb(col_err[1,i],col_err[2,i],col_err[3,i],0.3)
+col_e[i]=rgb(col_err[1,i],col_err[2,i],col_err[3,i],0.4)
 }
 # ------------------------------------------------------
 # -----------Sigv----------------------------------
@@ -148,7 +148,7 @@ boxplot(x,y,z,w,vs,vr,
     #cex.axis=1.2,
     log = "y",
 	xaxt="n", yaxt="n",
-    col= col_pru)
+    col= col_e)
 
 laby=TeX('$<d_{ij}>$ \\[kpc h$^{-1}$ \\]')
 mtext(laby, side = 2, cex = 1, line = 3.2, col = "black")

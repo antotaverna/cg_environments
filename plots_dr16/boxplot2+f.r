@@ -66,8 +66,8 @@ a=c("red2",'orange2','magenta3','blue3','green4','deepskyblue3')
 #rojo-gris
 a=c("#b2182b","#ef8a62","#fddbc7","#e0e0e0","#999999","#4d4d4d")
 #caca-verde
-#b=c("#8c510a","#d8b365", "#f6e8c3", "#c7eae5", "#5ab4ac", "#01665e")
-b=c("#8c510a","#d8b365","#f6e8c3","#01665e", "#5ab4ac", "#c7eae5")
+b=c("#8c510a","#d8b365", "#f6e8c3", "#c7eae5", "#5ab4ac", "#01665e")
+#b=c("#8c510a","#d8b365","#f6e8c3","#01665e", "#5ab4ac", "#c7eae5")
 #calidos
 a=c("#d73027","#fc8d59", "#fee090", "#e0f3f8", "#91bfdb", "#4575b4")
 a1 <- col2rgb(a)
@@ -95,6 +95,7 @@ col_e=vector()
 for(i in 1:6){
 col_e[i]=rgb(col_err[1,i],col_err[2,i],col_err[3,i],1.)
 }
+
 col_err=col2rgb(b, alpha = FALSE)/255
 col_e2=vector()
 for(i in 1:6){
@@ -112,7 +113,8 @@ vr <- VR$sigv #voids
 vs <- VS$sigv #voids
 
 #boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),
-boxplot(x, y, z, w, vs, vr,
+#boxplot(x, y, z, w, vs, vr,
+boxplot(x, y, z, vs, vr,w,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -149,7 +151,8 @@ vr <- VR$dij #voids
 vs <- VS$dij #voids
 
 #boxplot(log10(x),log10(z),log10(y),log10(w),log10(vs),log10(vr),	
-boxplot(x,y,z,w,vs,vr,
+#boxplot(x,y,z,w,vs,vr,
+boxplot(x, y, z, vs, vr,w,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -185,7 +188,8 @@ w <- Gf$rabs1 #campo
 vr <- VR$rabs1
 vs <- VS$rabs1 #voids
 
-boxplot(x,y,z,w,vs,vr,	
+#boxplot(x,y,z,w,vs,vr,	
+boxplot(x, y, z, vs, vr,w,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -211,7 +215,8 @@ w <- Gf$mu #campo
 vr <- VR$mu
 vs <- VS$mu #voids
 
-boxplot(x,y,z,w,vs,vr,	
+#boxplot(x,y,z,w,vs,vr,	
+boxplot(x, y, z, vs, vr,w,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -237,7 +242,8 @@ w <- Gf$rabs2 - Gf$rabs1  #campo
 vr <- VR$rabs2 -  VR$rabs1
 vs <- VS$rabs2 -  VS$rabs1
 
-boxplot(x,y,z,w,vs,vr,
+#boxplot(x,y,z,w,vs,vr,
+boxplot(x, y, z, vs, vr,w,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -267,7 +273,8 @@ vr <- VR$tcr
 vs <- VS$tcr
 
 #boxplot(log10(x),log10(y),log10(z),log10(w),log10(vs),log10(vr),	
-boxplot(x,y,z,w,vs,vr,
+#boxplot(x,y,z,w,vs,vr,
+boxplot(x, y, z, vs, vr,w,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,
@@ -298,7 +305,8 @@ w <- Gf$fr_red #campo
 vr <- VR$fr_red
 vs <- VS$fr_red
 
-boxplot(x,y,z,w,vs,vr,
+#boxplot(x,y,z,w,vs,vr,
+boxplot(x, y, z, vs, vr,w,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,	whisklty = 0, staplelty=0,
@@ -313,7 +321,7 @@ boxplot(x,y,z,w,vs,vr,
 
 laby=TeX('$F_{red}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")
-mtext(c(TeX('$CG_N$'),TeX('$CG_{LG}$'),TeX('$CG_{F}$'),TeX('$ CG_{NE} $'),TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),
+mtext(c(TeX('$CG_N$'),TeX('$CG_{LG}$'),TeX('$CG_{F}$'),TeX('$CG_{VS} $'),TeX('$CG_{VR}$'),TeX('$ CG_{NE} $')),
     at=c(1,2,3,4,5,6), side =1, cex = 0.9, line = 1.2, col = "black")
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
@@ -330,7 +338,8 @@ w <- Gf$fr_early #campo
 vr <- VR$fr_early
 vs <- VS$fr_early
 
-boxplot(x,y,z,w,vs,vr,
+#boxplot(x,y,z,w,vs,vr,
+boxplot(x, y, z, vs, vr,w,
 	las = 1,
 	notch = TRUE,
 	varwidth = TRUE,	whisklty = 0, staplelty=0,
@@ -345,7 +354,7 @@ boxplot(x,y,z,w,vs,vr,
 
 laby=TeX('$F_{early}$ ')
 mtext(laby, side = 2, cex = 1.3, line = 3.2, col = "black")
-mtext(c(TeX('$CG_N$'),TeX('$CG_{LG}$'),TeX('$CG_{F}$'),TeX('$ CG_{NE} $'), TeX('$CG_{VS} $'),TeX('$CG_{VR}$')),
+mtext(c(TeX('$CG_N$'),TeX('$CG_{LG}$'),TeX('$CG_{F}$'), TeX('$CG_{VS} $'),TeX('$CG_{VR}$'),TeX('$ CG_{NE} $')),
     at=c(1,2,3,4,5,6), side =1, cex = 0.9, line = 1.2, col = "black")
 magaxis(side=1, majorn=5, minorn=5, tcl=0.6, ratio=0., labels=FALSE)
 magaxis(side=2, majorn=5, minorn=5, tcl=0.5, ratio=0.5, labels=TRUE,las=2)
